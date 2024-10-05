@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import productImages from "./productImages";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
+import SideBar from "./SideBar"; // Import Sidebar
 import "../Styles/shop.css";
 
-const Shop = ({ onAddToCart, selectedCategory }) => {
+const Shop = ({ onAddToCart }) => {
   const [allProducts, setAllProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
   const [sortOrder, setSortOrder] = useState("asc");
+
+  const location = useLocation();
+  const [selectedCategory, setSelectedCategory] = useState(
+    location.state?.selectedCategory || null
+  );
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,10 +30,10 @@ const Shop = ({ onAddToCart, selectedCategory }) => {
           name: product.name,
           category: product.category,
           rate_in_rs: product.rate_in_rs,
-          image: productImages[product.name] || "/Images/placeholder.png", // Use image from map or fallback
+          image: productImages[product.name] || "/Images/placeholder.png",
         }));
         setAllProducts(fetchedProducts);
-        setProducts(fetchedProducts); // Initialize with all products
+        setProducts(fetchedProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -37,15 +44,17 @@ const Shop = ({ onAddToCart, selectedCategory }) => {
 
   useEffect(() => {
     if (selectedCategory) {
-      // Filter products based on the selected category
       setProducts(
         allProducts.filter((product) => product.category === selectedCategory)
       );
     } else {
-      // Show all products
       setProducts(allProducts);
     }
   }, [selectedCategory, allProducts]);
+
+  const handleCategorySelect = (category) => {
+    setSelectedCategory(category);
+  };
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -57,77 +66,79 @@ const Shop = ({ onAddToCart, selectedCategory }) => {
 
   const handleSort = (sortOption) => {
     if (sortOption === "low-to-high") {
-      console.log("Sorting by price: low to high");
       setSortOrder("asc");
     } else if (sortOption === "high-to-low") {
-      console.log("Sorting by price: high to low");
       setSortOrder("desc");
     }
   };
 
   return (
-    <div className="shop">
-      <div className="shop-header">
-        <h2>Products</h2>
+    <div className="shop-page-container">
+      <div className="sidebar">
+        <SideBar onCategorySelect={handleCategorySelect} />
+      </div>
 
-        <div className="sort-options">
-          <div className="sort-dropdown">
-            <button
-              className="sort-dropdown-btn"
-              onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-            >
-              Sort by price
-              <span className="sort-arrows">
-                <span className="arrow-up">▲</span>
-                <span className="arrow-down">▼</span>
-              </span>
-            </button>
-            {isSortDropdownOpen && (
-              <div
-                className={`sort-dropdown-content ${
-                  isSortDropdownOpen ? "show" : ""
-                }`}
+      <div className="shop-content">
+        <div className="shop-header">
+          <h2>Products</h2>
+
+          <div className="sort-options">
+            <div className="sort-dropdown">
+              <button
+                className="sort-dropdown-btn"
+                onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
               >
+                Sort by price
+                <span className="sort-arrows">
+                  <span className="arrow-up">▲</span>
+                  <span className="arrow-down">▼</span>
+                </span>
+              </button>
+              {isSortDropdownOpen && (
                 <div
-                  className="sort-item"
-                  onClick={() => handleSort("low-to-high")}
+                  className={`sort-dropdown-content ${
+                    isSortDropdownOpen ? "show" : ""
+                  }`}
                 >
-                  Low to high
+                  <div
+                    className="sort-item"
+                    onClick={() => handleSort("low-to-high")}
+                  >
+                    Low to high
+                  </div>
+                  <div
+                    className="sort-item"
+                    onClick={() => handleSort("high-to-low")}
+                  >
+                    High to low
+                  </div>
                 </div>
-                <div
-                  className="sort-item"
-                  onClick={() => handleSort("high-to-low")}
-                >
-                  High to low
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
+
+        <div className="product-grid">
+          {products.map((product) => (
+            <div key={product._id} onClick={() => handleProductClick(product)}>
+              <ProductCard
+                name={product.name}
+                rate_in_rs={product.rate_in_rs}
+                image={product.image}
+                onAddToCart={onAddToCart}
+              />
+            </div>
+          ))}
+        </div>
+
+        {selectedProduct && (
+          <ProductModal
+            product={selectedProduct}
+            onClose={handleCloseModal}
+            onAddToCart={onAddToCart}
+          />
+        )}
       </div>
-
-      <div className="product-grid">
-        {products.map((product) => (
-          <div key={product._id} onClick={() => handleProductClick(product)}>
-            <ProductCard
-              name={product.name}
-              rate_in_rs={product.rate_in_rs}
-              image={product.image}
-              onAddToCart={onAddToCart}
-            />
-          </div>
-        ))}
-      </div>
-
-      <div className="pagination"></div>
-
-      {selectedProduct && (
-        <ProductModal
-          product={selectedProduct}
-          onClose={handleCloseModal}
-          onAddToCart={onAddToCart}
-        />
-      )}
     </div>
   );
 };

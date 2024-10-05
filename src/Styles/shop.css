@@ -1,3 +1,18 @@
+.shop-page-container {
+  display: flex;
+  margin-top: 6%;
+}
+
+.sidebar {
+  /* flex: 1; */
+  flex: 0 0 20%;
+}
+
+.shop-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 1%;
+}
 .shop {
   padding: 20px;
   margin-top: 6%;

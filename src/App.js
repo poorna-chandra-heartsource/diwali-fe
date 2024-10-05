@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./Components/Header";
-import SideBar from "./Components/SideBar";
+// import SideBar from "./Components/SideBar";
 import Home from "./Components/Home";
 import Shop from "./Components/Shop";
 import Cart from "./Components/Cart";
@@ -47,7 +47,7 @@ const App = () => {
               path="/products"
               element={
                 <>
-                  <SideBar onCategorySelect={handleCategorySelect} />
+                  {/* <SideBar onCategorySelect={handleCategorySelect} /> */}
                   <Shop
                     onAddToCart={handleAddToCart}
                     selectedCategory={selectedCategory}
