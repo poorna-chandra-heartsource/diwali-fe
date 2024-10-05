@@ -1,0 +1,41 @@
+.ourProduct-grid {
+  width: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.ourProduct-card {
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.ourProduct-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.ourProduct-card img {
+  max-width: 80%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.ourProduct-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #003366;
+}
+
+.ourProductsHeader {
+  text-align: center;
+  color: #24013b;
+  font-weight: 700;
+  text-transform: uppercase;
+}
