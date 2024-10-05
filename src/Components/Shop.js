@@ -4,7 +4,7 @@ import axios from "axios";
 import productImages from "./productImages";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
-import SideBar from "./SideBar"; // Import Sidebar
+import SideBar from "./SideBar";
 import "../Styles/shop.css";
 
 const Shop = ({ onAddToCart }) => {

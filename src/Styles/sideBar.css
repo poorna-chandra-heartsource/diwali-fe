@@ -30,6 +30,12 @@
   display: flex;
   justify-content: space-between;
   color: #333;
+  cursor: pointer;
+}
+
+.category-item.selected {
+  font-weight: bold;
+  color: #000; /* You can adjust this to any color you prefer */
 }
 
 .category-item:last-child {
