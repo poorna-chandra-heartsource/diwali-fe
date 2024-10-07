@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Carousel from "./Carousel";
 import OurProducts from "./OurProducts";
+
 import "../Styles/home.css";
 
 const images = [

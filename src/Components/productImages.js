@@ -240,6 +240,17 @@ const productImages = {
   "GOLD BOX": "/Diwali-product-images/diwali-goldBox.jpg",
   "PLATINAM BOX": "/Diwali-product-images/diwali-platimamBox.jpg",
   "DIAMOND BOX": "/Diwali-product-images/diwali-diamondBox.jpg",
+  SPARKLERS: "/Diwali-product-images/diwali-12CM-RED-SPARKLERS.jpg",
+  "SINGLE CRACKERS":
+    "/Diwali-product-images/diwali-3-1by2-LAKSHMI-CRACKERS.jpg",
+  "ATOM BOMB": "/Diwali-product-images/diwali-ATOM BOMB-SMALL-GREEN.jpg",
+  "FLOWER POTS": "/Diwali-product-images/diwali-FLOWER-POTS-SPECIAL.png",
+  CHAKKARS: "/Diwali-product-images/diwali-GROUND-CHAKKAR-BIG-4BOX.png",
+  "DELUXE CRACKERS": "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
+  "ELECTRIC CRACKERS": "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
+  "TWINKLING STARS": "/Diwali-product-images/diwali-11-2-TWINKLING-STAR.jpg",
+  "LOOSE CRACKERS": "/Diwali-product-images/diwali-ASSORTED-CARTOON.jpg",
+  PENCIL: "/Diwali-product-images/diwali-12-PENCIL.jpg",
 };
 
 export default productImages;

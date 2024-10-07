@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import productImages from "./productImages";
 import "../Styles/ourProducts.css";
 
 const OurProducts = () => {
@@ -16,7 +17,9 @@ const OurProducts = () => {
         const fetchedProducts = response.data.map((product, index) => ({
           id: index + 1,
           name: product.product_category,
-          image: "/Images/logo.png",
+          image:
+            productImages[product.product_category] ||
+            "/Images/placeholder.png",
         }));
         setProducts(fetchedProducts);
       } catch (error) {

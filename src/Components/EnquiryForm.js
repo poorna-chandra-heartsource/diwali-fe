@@ -133,6 +133,9 @@ const EnquiryForm = ({ cartItems }) => {
         type: "error",
       });
     }
+    setTimeout(() => {
+      setNotification({ message: "", type: "" });
+    }, 6000);
   };
 
   const getSubtotalPrice = () => {

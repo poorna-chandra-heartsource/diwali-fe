@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../Styles/sideBar.css";
 
-const Sidebar = ({ onCategorySelect }) => {
+const Sidebar = ({ onCategorySelect, selectedCategory }) => {
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -26,7 +25,6 @@ const Sidebar = ({ onCategorySelect }) => {
 
   const handleCategoryClick = (category) => {
     if (selectedCategory !== category) {
-      setSelectedCategory(category);
       onCategorySelect(category);
     }
   };

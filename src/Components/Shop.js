@@ -75,7 +75,10 @@ const Shop = ({ onAddToCart }) => {
   return (
     <div className="shop-page-container">
       <div className="sidebar">
-        <SideBar onCategorySelect={handleCategorySelect} />
+        <SideBar
+          onCategorySelect={handleCategorySelect}
+          selectedCategory={selectedCategory}
+        />
       </div>
 
       <div className="shop-content">

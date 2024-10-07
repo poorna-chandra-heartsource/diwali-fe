@@ -5,15 +5,22 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .ourProduct-card {
+  width: 100%;
+  min-height: 250px;
   border: 2px solid #ddd;
   border-radius: 12px;
   padding: 20px;
   text-align: center;
   transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .ourProduct-card:hover {
@@ -22,9 +29,11 @@
 }
 
 .ourProduct-card img {
-  max-width: 80%;
-  height: auto;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
   margin-bottom: 10px;
+  box-sizing: border-box;
 }
 
 .ourProduct-card h3 {
