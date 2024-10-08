@@ -144,7 +144,10 @@ const Shop = ({ onAddToCart }) => {
             </div>
           </div>
         </div>
-
+        <p>
+          <sup>*</sup>Images are for display purposes only. The actual product
+          may differ from the image shown.
+        </p>
         <div className="product-grid">
           {products.map((product) => (
             <div key={product._id} onClick={() => handleProductClick(product)}>

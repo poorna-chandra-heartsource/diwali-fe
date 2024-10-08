@@ -49,13 +49,19 @@ p {
   text-align: left;
 }
 
-#username,
+#email,
 #password {
   width: 100%;
   padding: 10px;
-  border: 1px solid #dddddd;
-  border-radius: 25px;
-  font-size: 1em;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input.error-input {
+  border: 2px solid red;
 }
 
 .login-options {

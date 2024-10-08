@@ -37,6 +37,10 @@ const OurProducts = () => {
     <>
       <div className="ourProductsHeader">
         <h2>Our Products</h2>
+        <p>
+          <sup>*</sup>Images are for display purposes only. The actual product
+          may differ from the image shown.
+        </p>
       </div>
       <div className="ourProduct-grid">
         {products.map((product) => (

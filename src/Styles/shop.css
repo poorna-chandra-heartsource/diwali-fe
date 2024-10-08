@@ -24,6 +24,9 @@
   margin-bottom: 20px;
   z-index: 10;
 }
+.shop-header p {
+  font-size: 0.7em;
+}
 
 .shop-control-bar {
   background-color: #f5f5f5;
