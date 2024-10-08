@@ -5,6 +5,7 @@ import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
 import SideBar from "./SideBar";
 import "../Styles/shop.css";
+import productImages from "./productImages";
 
 const Shop = ({ onAddToCart }) => {
   const [allProducts, setAllProducts] = useState([]);
@@ -29,8 +30,7 @@ const Shop = ({ onAddToCart }) => {
           name: product.name,
           category: product.category,
           rate_in_rs: product.rate_in_rs,
-          image:
-            `/product-images/${product.name}.jpg` || "/Images/placeholder.png",
+          image: productImages[product.name] || "/Images/placeholder.png",
         }));
         setAllProducts(fetchedProducts);
         setProducts(fetchedProducts);

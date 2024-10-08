@@ -45,10 +45,7 @@ const OurProducts = () => {
             className="ourProduct-card"
             onClick={() => handleProductClick(product.name)}
           >
-            <img
-              src={`/Diwali-product-images/${product.image}`}
-              alt={product.name}
-            />
+            <img src={`${product.image}`} alt={product.name} />
             <h3>{product.name}</h3>
           </div>
         ))}
