@@ -7,9 +7,10 @@ import "../Styles/home.css";
 
 const images = [
   "/Images/bgText.png",
-  "/Images/image1.png",
-  "/Images/image2.png",
-  "/Images/image3.png",
+  "/Images/Diwali-image-3.jpg",
+  "/Images/Diwali-image-4.png",
+  "/Images/Diwali-image-8.jpg",
+  "/Images/image-5.png",
   "/Images/image4.png",
   "/Images/Chakaras.png",
 ];

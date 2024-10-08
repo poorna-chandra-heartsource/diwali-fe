@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import productImages from "./productImages";
 import ProductCard from "./ProductCard";
 import ProductModal from "./ProductModal";
 import SideBar from "./SideBar";
@@ -12,7 +11,7 @@ const Shop = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
-  const [sortOrder, setSortOrder] = useState("asc");
+  const [sortOption, setSortOption] = useState(null);
 
   const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState(
@@ -23,14 +22,15 @@ const Shop = ({ onAddToCart }) => {
     const fetchProducts = async () => {
       try {
         const response = await axios.post(
-          `http://127.0.0.1:8000/products/fetch?sort_field=name&sort_order=${sortOrder}&page=1&limit=70`
+          `http://127.0.0.1:8000/products/fetch?sort_field=name&sort_order=asc&page=1&limit=70`
         );
         const fetchedProducts = response.data.data.map((product) => ({
           _id: product._id,
           name: product.name,
           category: product.category,
           rate_in_rs: product.rate_in_rs,
-          image: productImages[product.name] || "/Images/placeholder.png",
+          image:
+            `/product-images/${product.name}.jpg` || "/Images/placeholder.png",
         }));
         setAllProducts(fetchedProducts);
         setProducts(fetchedProducts);
@@ -40,7 +40,7 @@ const Shop = ({ onAddToCart }) => {
     };
 
     fetchProducts();
-  }, [sortOrder]);
+  }, []);
 
   useEffect(() => {
     if (selectedCategory) {
@@ -64,12 +64,20 @@ const Shop = ({ onAddToCart }) => {
     setSelectedProduct(null);
   };
 
-  const handleSort = (sortOption) => {
-    if (sortOption === "low-to-high") {
-      setSortOrder("asc");
-    } else if (sortOption === "high-to-low") {
-      setSortOrder("desc");
+  const handleSort = (selectedSortOption) => {
+    setSortOption(selectedSortOption);
+    setIsSortDropdownOpen(false);
+    let sortedProducts = [];
+    if (selectedSortOption === "price: low-to-high") {
+      sortedProducts = [...products].sort(
+        (a, b) => a.rate_in_rs - b.rate_in_rs
+      );
+    } else if (selectedSortOption === "price: high-to-low") {
+      sortedProducts = [...products].sort(
+        (a, b) => b.rate_in_rs - a.rate_in_rs
+      );
     }
+    setProducts(sortedProducts);
   };
 
   return (
@@ -91,12 +99,28 @@ const Shop = ({ onAddToCart }) => {
                 className="sort-dropdown-btn"
                 onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
               >
-                Sort by price
+                {sortOption === null
+                  ? "Sort by price"
+                  : sortOption === "price: low-to-high"
+                  ? "Price : Low to high"
+                  : "Price : High to low"}
+
                 <span className="sort-arrows">
-                  <span className="arrow-up">▲</span>
-                  <span className="arrow-down">▼</span>
+                  {sortOption === null && (
+                    <>
+                      <span className="arrow-up">▲</span>
+                      <span className="arrow-down">▼</span>
+                    </>
+                  )}
+                  {sortOption === "price: low-to-high" && (
+                    <span className="arrow-up">▲</span>
+                  )}
+                  {sortOption === "price: high-to-low" && (
+                    <span className="arrow-down">▼</span>
+                  )}
                 </span>
               </button>
+
               {isSortDropdownOpen && (
                 <div
                   className={`sort-dropdown-content ${
@@ -105,13 +129,13 @@ const Shop = ({ onAddToCart }) => {
                 >
                   <div
                     className="sort-item"
-                    onClick={() => handleSort("low-to-high")}
+                    onClick={() => handleSort("price: low-to-high")}
                   >
                     Low to high
                   </div>
                   <div
                     className="sort-item"
-                    onClick={() => handleSort("high-to-low")}
+                    onClick={() => handleSort("price: high-to-low")}
                   >
                     High to low
                   </div>

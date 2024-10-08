@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../Styles/enquiryForm.css";
 
-const EnquiryForm = ({ cartItems }) => {
+const EnquiryForm = ({ cartItems, setCartItems }) => {
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
@@ -107,6 +107,18 @@ const EnquiryForm = ({ cartItems }) => {
   };
 
   const handleSubmit = async () => {
+    //if cart is empty
+    if (cartItems.length === 0) {
+      setNotification({
+        message:
+          "Your cart is empty! Please add items to the cart before submitting an enquiry.",
+        type: "error",
+      });
+      setTimeout(() => {
+        setNotification({ message: "", type: "" });
+      }, 7000);
+      return;
+    }
     if (!validateForm()) {
       return;
     }
@@ -118,9 +130,30 @@ const EnquiryForm = ({ cartItems }) => {
       );
       if (response.status === 200 || response.status === 201) {
         setNotification({
-          message: "User created successfully!",
+          message:
+            "Your Enquiry has sent succsessfully ! Please check your email for more details.",
           type: "success",
         });
+        setFormData({
+          full_name: "",
+          email: "",
+          mobile: "",
+          address: {
+            city: "",
+            state: "",
+            pincode: "",
+            addressLine1: "",
+            addressLine2: "",
+            landmark: "",
+          },
+          order: {
+            total_price: 0,
+            orderItems: [],
+          },
+        });
+        // Clear the cart after successful submission
+        setCartItems([]); // Clear cart in state
+        localStorage.removeItem("cartItems"); // Remove from localStorage
       } else {
         setNotification({
           message: "Failed to create user. Please try again.",
@@ -128,14 +161,25 @@ const EnquiryForm = ({ cartItems }) => {
         });
       }
     } catch (error) {
-      setNotification({
-        message: "An error occurred. Please try again.",
-        type: "error",
-      });
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setNotification({
+          message: `Error: ${error.response.data.message}`,
+          type: "error",
+        });
+      } else {
+        setNotification({
+          message: "An unknown error occurred. Please try again.",
+          type: "error",
+        });
+      }
     }
     setTimeout(() => {
       setNotification({ message: "", type: "" });
-    }, 6000);
+    }, 7000);
   };
 
   const getSubtotalPrice = () => {
@@ -150,68 +194,73 @@ const EnquiryForm = ({ cartItems }) => {
       <div className="form-container">
         <h2>Fill your details</h2>
         <form>
-          <div className="form-group">
-            <label>Name *</label>
-            <input
-              type="text"
-              name="full_name"
-              value={formData.full_name}
-              onChange={handleInputChange}
-              className={errors.email ? "error-input" : ""}
-              style={{
-                border: errors.full_name
-                  ? "2px solid red"
-                  : formData.full_name
-                  ? "1px solid #ccc"
-                  : "",
-              }}
-            />
-            {errors.full_name && (
-              <span className="error">{errors.full_name}</span>
-            )}
+          <div className="form-row">
+            <div className="form-group">
+              <label>Name *</label>
+              <input
+                type="text"
+                name="full_name"
+                value={formData.full_name}
+                onChange={handleInputChange}
+                className={errors.email ? "error-input" : ""}
+                style={{
+                  border: errors.full_name
+                    ? "2px solid red"
+                    : formData.full_name
+                    ? "1px solid #ccc"
+                    : "",
+                }}
+              />
+              {errors.full_name && (
+                <span className="error">{errors.full_name}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label>Email *</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className={errors.email ? "error-input" : ""}
+                style={{
+                  border: errors.email
+                    ? "2px solid red"
+                    : formData.full_name
+                    ? "1px solid #ccc"
+                    : "",
+                }}
+              />
+              {errors.email && <span className="error">{errors.email}</span>}
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label>Contact No. *</label>
+              <input
+                type="number"
+                name="mobile"
+                value={formData.mobile}
+                onChange={handleInputChange}
+                className={errors.mobile ? "error-input" : ""}
+                style={{
+                  border: errors.mobile
+                    ? "2px solid red"
+                    : formData.full_name
+                    ? "1px solid #ccc"
+                    : "",
+                }}
+              />
+              {errors.mobile && <span className="error">{errors.mobile}</span>}
+            </div>
+
+            <div className="form-group">
+              <label>Country / Region *</label>
+              <input type="text" value="India" readOnly />
+            </div>
           </div>
 
-          <div className="form-group">
-            <label>Email *</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              className={errors.email ? "error-input" : ""}
-              style={{
-                border: errors.email
-                  ? "2px solid red"
-                  : formData.full_name
-                  ? "1px solid #ccc"
-                  : "",
-              }}
-            />
-            {errors.email && <span className="error">{errors.email}</span>}
-          </div>
-          <div className="form-group">
-            <label>Contact No. *</label>
-            <input
-              type="number"
-              name="mobile"
-              value={formData.mobile}
-              onChange={handleInputChange}
-              className={errors.mobile ? "error-input" : ""}
-              style={{
-                border: errors.mobile
-                  ? "2px solid red"
-                  : formData.full_name
-                  ? "1px solid #ccc"
-                  : "",
-              }}
-            />
-            {errors.mobile && <span className="error">{errors.mobile}</span>}
-          </div>
-
-          <div className="form-group">
-            <label>Country / Region *</label>
-            <input type="text" value="India" readOnly />
-          </div>
           <div className="form-group">
             <label>Street address *</label>
             <input
@@ -241,68 +290,74 @@ const EnquiryForm = ({ cartItems }) => {
               onChange={handleInputChange}
             />
           </div>
-          <div className="form-group">
-            <label>Town / City *</label>
-            <input
-              type="text"
-              name="city"
-              value={formData.address.city}
-              onChange={handleInputChange}
-              className={errors.city ? "error-input" : ""}
-              style={{
-                border: errors.city
-                  ? "2px solid red"
-                  : formData.full_name
-                  ? "1px solid #ccc"
-                  : "",
-              }}
-            />
-            {errors.city && <span className="error">{errors.city}</span>}
+          <div className="form-row">
+            <div className="form-group">
+              <label>Town / City *</label>
+              <input
+                type="text"
+                name="city"
+                value={formData.address.city}
+                onChange={handleInputChange}
+                className={errors.city ? "error-input" : ""}
+                style={{
+                  border: errors.city
+                    ? "2px solid red"
+                    : formData.full_name
+                    ? "1px solid #ccc"
+                    : "",
+                }}
+              />
+              {errors.city && <span className="error">{errors.city}</span>}
+            </div>
+            <div className="form-group">
+              <label>Landmark</label>
+              <input
+                type="text"
+                name="landmark"
+                value={formData.address.landmark}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
-          <div className="form-group">
-            <label>Landmark</label>
-            <input
-              type="text"
-              name="landmark"
-              value={formData.address.landmark}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="form-group">
-            <label>Pincode *</label>
-            <input
-              type="number"
-              name="pincode"
-              value={formData.address.pincode}
-              onChange={handleInputChange}
-              className={errors.pincode ? "error-input" : ""}
-              style={{
-                border: errors.pincode
-                  ? "2px solid red"
-                  : formData.full_name
-                  ? "1px solid #ccc"
-                  : "",
-              }}
-            />
-            {errors.pincode && <span className="error">{errors.pincode}</span>}
-          </div>
-          <div className="form-group">
-            <label>State *</label>
-            <input
-              type="text"
-              name="state"
-              value={formData.address.state}
-              onChange={handleInputChange}
-              className={errors.state ? "error-input" : ""}
-              style={{
-                border: errors.state
-                  ? "2px solid red"
-                  : formData.full_name
-                  ? "1px solid #ccc"
-                  : "",
-              }}
-            />
-            {errors.state && <span className="error">{errors.state}</span>}
+          <div className="form-row">
+            <div className="form-group">
+              <label>Pincode *</label>
+              <input
+                type="number"
+                name="pincode"
+                value={formData.address.pincode}
+                onChange={handleInputChange}
+                className={errors.pincode ? "error-input" : ""}
+                style={{
+                  border: errors.pincode
+                    ? "2px solid red"
+                    : formData.full_name
+                    ? "1px solid #ccc"
+                    : "",
+                }}
+              />
+              {errors.pincode && (
+                <span className="error">{errors.pincode}</span>
+              )}
+            </div>
+            <div className="form-group">
+              <label>State *</label>
+              <input
+                type="text"
+                name="state"
+                value={formData.address.state}
+                onChange={handleInputChange}
+                className={errors.state ? "error-input" : ""}
+                style={{
+                  border: errors.state
+                    ? "2px solid red"
+                    : formData.full_name
+                    ? "1px solid #ccc"
+                    : "",
+                }}
+              />
+              {errors.state && <span className="error">{errors.state}</span>}
+            </div>
           </div>
         </form>
 
@@ -348,6 +403,17 @@ const EnquiryForm = ({ cartItems }) => {
           <div className="summary-item total">
             <strong>Total</strong>
             <span>₹{getSubtotalPrice()}</span>
+          </div>
+          <div className="termConditions">
+            By continuing,you agree to Website's{" "}
+            <a
+              href="/terms-and-conditions"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Term & Conditions
+            </a>{" "}
+            <sup>*</sup>
           </div>
         </div>
         <button className="submitBtn" onClick={handleSubmit}>

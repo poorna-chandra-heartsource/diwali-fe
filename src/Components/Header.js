@@ -7,7 +7,9 @@ const Header = ({ cartCount }) => {
 
   return (
     <header className="header">
-      <div className="logo">Diwali Celebrations</div>
+      <div className="logo">
+        <a href="/">Diwali Celebrations</a>
+      </div>
       <nav>
         <ul>
           <li>
@@ -17,7 +19,7 @@ const Header = ({ cartCount }) => {
             <a href="/products">Products</a>
           </li>
           <li>
-            <a href="#">Login</a>
+            <a href="/login">Login</a>
           </li>
         </ul>
       </nav>
@@ -28,7 +30,7 @@ const Header = ({ cartCount }) => {
         >
           <i
             class="fa-solid fa-cart-shopping fa-flip-horizontal"
-            style={{ color: "#003366", fontSize: "40px" }}
+            style={{ color: "#ff4d4d", fontSize: "40px" }}
           ></i>
           <span className="cart-count">{cartCount}</span>
         </div>

@@ -39,9 +39,23 @@
 }
 
 .form-group {
+  flex: 1;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
+}
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+.termConditions {
+  color: #797988;
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+  }
 }
 
 label {
@@ -148,12 +162,12 @@ a:hover {
   z-index: 1000;
 }
 .notification-success {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #28a745;
+  color: #fff;
 }
 .notification-error {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: #dc3545;
+  color: #fff;
 }
 
 @media (max-width: 768px) {

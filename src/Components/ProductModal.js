@@ -10,13 +10,20 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
   if (!product) return null;
 
   const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+    if (quantity < 100) {
+      setQuantity((prevQuantity) => prevQuantity + 1);
+    }
   };
 
   const handleDecrement = () => {
     if (quantity > 0) {
       setQuantity((prevQuantity) => prevQuantity - 1);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const value = Math.min(100, Math.max(0, Number(e.target.value)));
+    setQuantity(value);
   };
 
   const handleAddtoCart = () => {
@@ -28,7 +35,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
         setNotification("Added to Cart");
       }
       setLoading(false);
-      //remove notification
+      // Remove notification after 3 seconds
       setTimeout(() => {
         setNotification("");
       }, 3000);
@@ -50,20 +57,29 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
             <button className="quantity-btn" onClick={handleDecrement}>
               -
             </button>
-            <span className="quantity">{quantity}</span>
+            <input
+              type="number"
+              className="quantity-input"
+              value={quantity}
+              onChange={handleInputChange}
+              min="0"
+              max="100"
+            />
             <button className="quantity-btn" onClick={handleIncrement}>
               +
             </button>
-            <button
-              className="enquiry-btn"
-              onClick={handleAddtoCart}
-              disabled={loading}
-            >
-              {loading ? <Spinner /> : " Add to Cart"}
-            </button>
-            {/* Notification Message display*/}
-            {notification && <div className="notification">{notification}</div>}
           </div>
+
+          <button
+            className="enquiry-btn"
+            onClick={handleAddtoCart}
+            disabled={loading}
+          >
+            {loading ? <Spinner /> : " Add to Cart"}
+          </button>
+
+          {/* Notification Message display */}
+          {notification && <div className="notification">{notification}</div>}
         </div>
       </div>
     </div>

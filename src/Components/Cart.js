@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EmptyCart from "./EmptyCart";
 import "../Styles/cart.css";
 
 const Cart = ({ cartItems, setCartItems }) => {
   const navigate = useNavigate();
+  const [notification, setNotification] = useState({ message: "", type: "" });
   const handleRemoveItem = (name) => {
     setCartItems((prevCartItems) =>
       prevCartItems.filter((item) => item.name !== name)
@@ -13,7 +15,9 @@ const Cart = ({ cartItems, setCartItems }) => {
   const handleIncreaseQuantity = (name) => {
     setCartItems((prevCartItems) =>
       prevCartItems.map((item) =>
-        item.name === name ? { ...item, quantity: item.quantity + 1 } : item
+        item.name === name && item.quantity < 100
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
       )
     );
   };
@@ -28,6 +32,15 @@ const Cart = ({ cartItems, setCartItems }) => {
     );
   };
 
+  const handleQuantityInputChange = (name, value) => {
+    const newValue = Math.min(100, Math.max(1, Number(value)));
+    setCartItems((prevCartItems) =>
+      prevCartItems.map((item) =>
+        item.name === name ? { ...item, quantity: newValue } : item
+      )
+    );
+  };
+
   const getSubtotalPrice = () => {
     return cartItems.reduce(
       (total, item) => total + item.rate_in_rs * item.quantity,
@@ -36,15 +49,37 @@ const Cart = ({ cartItems, setCartItems }) => {
   };
 
   const handleConfirmEnquiry = () => {
+    if (cartItems.length === 0) {
+      setNotification({
+        message:
+          "Your cart is empty! Please add items to the cart before confirming an enquiry.",
+        type: "error",
+      });
+      setTimeout(() => {
+        setNotification({ message: "", type: "" });
+      }, 7000);
+      return;
+    }
     navigate("/enquiryForm");
   };
 
   return (
     <div className="cart-container">
+      {notification.message && (
+        <p
+          className={`enquiry-notification ${
+            notification.type === "success"
+              ? "notification-success"
+              : "notification-error"
+          }`}
+        >
+          {notification.message}
+        </p>
+      )}
       <div className="cart-items-section">
         <h2>Your Cart</h2>
         {cartItems.length === 0 ? (
-          <p>Your cart is empty</p>
+          <EmptyCart />
         ) : (
           <div className="cart-items">
             {cartItems.map((item, index) => (
@@ -67,9 +102,16 @@ const Cart = ({ cartItems, setCartItems }) => {
                       >
                         -
                       </button>
-                      &nbsp;
-                      <span className="quantity">{item.quantity}</span>
-                      &nbsp;
+                      <input
+                        type="number"
+                        className="quantity-input"
+                        value={item.quantity}
+                        onChange={(e) =>
+                          handleQuantityInputChange(item.name, e.target.value)
+                        }
+                        min="1"
+                        max="100"
+                      />
                       <button
                         className="increase-btn"
                         onClick={() => handleIncreaseQuantity(item.name)}

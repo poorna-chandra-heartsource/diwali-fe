@@ -18,14 +18,8 @@
   color: black;
 }
 
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .carousel-container {
     height: 300px;
   }
 }
-
-@media (min-width: 769px) {
-  .carousel-container {
-    height: 500px;
-  }
-} */

@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./Components/Header";
-// import SideBar from "./Components/SideBar";
 import Home from "./Components/Home";
 import Shop from "./Components/Shop";
 import Cart from "./Components/Cart";
 import EnquiryForm from "./Components/EnquiryForm";
+import Login from "./Components/Login";
+import TermConditions from "./Components/TermConditions";
 import "./Styles/app.css";
 
 const App = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    // Load cart items from localStorage if they exist
+    const savedCartItems = localStorage.getItem("cartItems");
+    return savedCartItems ? JSON.parse(savedCartItems) : [];
+  });
+
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const handleCategorySelect = (category) => {
-    setSelectedCategory(category);
-  };
+  // Save cart items to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const handleAddToCart = (product, quantity) => {
     setCartItems((prevCartItems) => {
@@ -47,7 +54,6 @@ const App = () => {
               path="/products"
               element={
                 <>
-                  {/* <SideBar onCategorySelect={handleCategorySelect} /> */}
                   <Shop
                     onAddToCart={handleAddToCart}
                     selectedCategory={selectedCategory}
@@ -63,8 +69,15 @@ const App = () => {
             />
             <Route
               path="enquiryForm"
-              element={<EnquiryForm cartItems={cartItems} />}
+              element={
+                <EnquiryForm
+                  cartItems={cartItems}
+                  setCartItems={setCartItems}
+                />
+              }
             />
+            <Route path="/login" element={<Login />} />
+            <Route path="/terms-and-conditions" component={TermConditions} />
           </Routes>
         </div>
       </div>
