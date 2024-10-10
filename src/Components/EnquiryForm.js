@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../Styles/enquiryForm.css";
+import TermConditions from "./TermConditions";
 
 const EnquiryForm = ({ cartItems, setCartItems }) => {
   const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
   });
   const [notification, setNotification] = useState({ message: "", type: "" });
   const [errors, setErrors] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const orderItems = cartItems.map((item) => ({
@@ -111,7 +113,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
     if (cartItems.length === 0) {
       setNotification({
         message:
-          "Your cart is empty! Please add items to the cart before submitting an enquiry.",
+          "Your cart is empty! Please add items to the cart before submitting an inquiry.",
         type: "error",
       });
       setTimeout(() => {
@@ -131,7 +133,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
       if (response.status === 200 || response.status === 201) {
         setNotification({
           message:
-            "Your Enquiry has sent succsessfully ! Please check your email for more details.",
+            "Your Inquiry has sent succsessfully ! Please check your email for more details.",
           type: "success",
         });
         setFormData({
@@ -374,7 +376,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
         )}
       </div>
       <div className="order-summary-container">
-        <h2>Your order</h2>
+        <h2>Your Inquiry</h2>
         <div className="order-summary">
           <div className="summary-item">
             <strong>Product(s)</strong>
@@ -405,21 +407,30 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
             <span>₹{getSubtotalPrice()}</span>
           </div>
           <div className="termConditions">
-            By continuing,you agree to Website's{" "}
+            By sending your inquiry, you agree to the &nbsp;
             <a
-              href="/terms-and-conditions"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/#"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsModalOpen(true);
+              }}
             >
-              Term & Conditions
-            </a>{" "}
+              Terms & Conditions
+            </a>
+            &nbsp; of Diwali-Celebrations Website
             <sup>*</sup>
           </div>
         </div>
+        <br />
         <button className="submitBtn" onClick={handleSubmit}>
-          Send Enquiry
+          Send Inquiry
         </button>
       </div>
+      {/* Modal */}
+      <TermConditions
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };

@@ -68,16 +68,15 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
             <button className="quantity-btn" onClick={handleIncrement}>
               +
             </button>
+
+            <button
+              className="enquiry-btn"
+              onClick={handleAddtoCart}
+              disabled={loading}
+            >
+              {loading ? <Spinner /> : " Add to Cart"}
+            </button>
           </div>
-
-          <button
-            className="enquiry-btn"
-            onClick={handleAddtoCart}
-            disabled={loading}
-          >
-            {loading ? <Spinner /> : " Add to Cart"}
-          </button>
-
           {/* Notification Message display */}
           {notification && <div className="notification">{notification}</div>}
         </div>

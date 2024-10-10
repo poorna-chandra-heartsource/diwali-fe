@@ -52,7 +52,7 @@ const Cart = ({ cartItems, setCartItems }) => {
     if (cartItems.length === 0) {
       setNotification({
         message:
-          "Your cart is empty! Please add items to the cart before confirming an enquiry.",
+          "Your cart is empty! Please add items to the cart before confirming an inquiry.",
         type: "error",
       });
       setTimeout(() => {
@@ -152,7 +152,7 @@ const Cart = ({ cartItems, setCartItems }) => {
             <span>₹{getSubtotalPrice()}</span>
           </div>
           <button className="proceed-btn" onClick={handleConfirmEnquiry}>
-            Confirm Enquiry
+            Confirm Inquiry
           </button>
         </div>
       </div>

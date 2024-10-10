@@ -17,7 +17,7 @@
   border-radius: 8px;
   max-width: 500px;
   width: 90%;
-  height: 500px;
+  height: 550px;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
@@ -46,12 +46,6 @@
 }
 .modal-info h2 {
   margin: 2px 0;
-}
-
-.old-price {
-  text-decoration: line-through;
-  color: #888;
-  margin-bottom: 2px;
 }
 
 .new-price {

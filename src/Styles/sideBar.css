@@ -47,7 +47,7 @@
   color: #aaa;
 }
 
-/* Mobile Version */
+/* Tablet Version (max-width: 768px) */
 @media (max-width: 768px) {
   .sidebar-container {
     margin-top: 5%;
@@ -73,10 +73,12 @@
   }
 }
 
+/* Mobile Version (max-width: 480px) */
 @media (max-width: 480px) {
   .sidebar-container {
     margin-top: 3%;
     padding: 5px;
+    border-radius: 4px;
   }
 
   .sidebar-title {
@@ -86,6 +88,11 @@
   .category-item {
     font-size: 13px;
     padding: 8px 0;
+  }
+
+  .category-item.selected {
+    font-weight: bold;
+    color: #000;
   }
 
   .item-count {

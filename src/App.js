@@ -7,9 +7,72 @@ import Cart from "./Components/Cart";
 import EnquiryForm from "./Components/EnquiryForm";
 import Login from "./Components/Login";
 import TermConditions from "./Components/TermConditions";
+import OrderDetails from "./Components/OrderDetails";
 import "./Styles/app.css";
 
 const App = () => {
+  const userOrders = [
+    {
+      name: "10 CM COLOR SPARKLERS",
+      quantity: 22,
+      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
+      subtotal: 2220,
+    },
+    {
+      name: "10 CM ELECTRIC SPARKLERS",
+      quantity: 30,
+      image: "/Diwali-product-images/diwali-SPYDER.jpg",
+      subtotal: 3820,
+    },
+    {
+      name: "10 CM COLOR SPARKLERS",
+      quantity: 22,
+      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
+      subtotal: 2220,
+    },
+    {
+      name: "10 CM ELECTRIC SPARKLERS",
+      quantity: 30,
+      image: "/Diwali-product-images/diwali-SPYDER.jpg",
+      subtotal: 3820,
+    },
+    {
+      name: "10 CM COLOR SPARKLERS",
+      quantity: 22,
+      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
+      subtotal: 2220,
+    },
+    {
+      name: "10 CM ELECTRIC SPARKLERS",
+      quantity: 30,
+      image: "/Diwali-product-images/diwali-SPYDER.jpg",
+      subtotal: 3820,
+    },
+    {
+      name: "10 CM COLOR SPARKLERS",
+      quantity: 22,
+      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
+      subtotal: 2220,
+    },
+    {
+      name: "10 CM ELECTRIC SPARKLERS",
+      quantity: 30,
+      image: "/Diwali-product-images/diwali-SPYDER.jpg",
+      subtotal: 3820,
+    },
+    {
+      name: "10 CM COLOR SPARKLERS",
+      quantity: 22,
+      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
+      subtotal: 2220,
+    },
+    {
+      name: "10 CM ELECTRIC SPARKLERS",
+      quantity: 30,
+      image: "/Diwali-product-images/diwali-SPYDER.jpg",
+      subtotal: 3820,
+    },
+  ];
   const [cartItems, setCartItems] = useState(() => {
     // Load cart items from localStorage if they exist
     const savedCartItems = localStorage.getItem("cartItems");
@@ -78,6 +141,10 @@ const App = () => {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/terms-and-conditions" component={TermConditions} />
+            <Route
+              path="/order-details"
+              element={<OrderDetails orders={userOrders} />}
+            />
           </Routes>
         </div>
       </div>

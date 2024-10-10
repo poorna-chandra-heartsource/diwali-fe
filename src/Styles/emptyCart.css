@@ -6,6 +6,7 @@
   min-height: 100vh;
   text-align: center;
   color: #333;
+  cursor: pointer;
 }
 
 .cart-image img {
@@ -23,4 +24,40 @@ h2 {
 p {
   font-size: 16px;
   color: #777;
+}
+
+/* Tablet Styles (max-width: 768px) */
+@media (max-width: 768px) {
+  .cart-image img {
+    margin-top: -10em;
+    width: 250px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
+
+/* Mobile Styles (max-width: 480px) */
+@media (max-width: 480px) {
+  .empty-cart-container {
+    padding: 0 20px;
+  }
+
+  .cart-image img {
+    margin-top: -5em;
+    width: 200px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 12px;
+  }
 }

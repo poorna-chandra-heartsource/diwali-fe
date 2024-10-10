@@ -64,9 +64,9 @@ const productImages = {
     "/Diwali-product-images/diwali-11-2-TWINKLING-STAR.jpg",
   "11\u20442 JIL JIL TWINKLING STAR":
     "/Diwali-product-images/diwali-11-2-JIL-JIL-TWINKLING STAR.jpg",
-  '4" TWINKLING STAR': "/Diwali-product-images/diwali-4-TWINKLING-STAR.jpg",
-  '7" PENCIL': "/Diwali-product-images/diwali-7-PENCIL.jpg",
-  '12" PENCIL': "/Diwali-product-images/diwali-12-PENCIL.jpg",
+  '4"" TWINKLING STAR': "/Diwali-product-images/diwali-4-TWINKLING-STAR.jpg",
+  '7"" PENCIL': "/Diwali-product-images/diwali-7-PENCIL.jpg",
+  '12"" PENCIL': "/Diwali-product-images/diwali-12-PENCIL.jpg",
   "FLOWER POTS SMALL": "/Diwali-product-images/diwali-FLOWER-POTS-SMALL.png",
   "FLOWER POTS BIG": "/Diwali-product-images/diwali-FLOWER-POTS-BIG.png",
   "FLOWER POTS SPECIAL":
@@ -74,7 +74,7 @@ const productImages = {
   "FLOWER POTS ASOKA": "/Diwali-product-images/diwali-FLOWER-POTS-ASOKA.png",
   "FLOWER POTS GIANT": "/Diwali-product-images/diwali-FLOWER-POTS-GIANT.png",
   "FLOWER POTS DELUXE": "/Diwali-product-images/diwali-FLOWER-POTS-DELUXE.png",
-  "FLOWER POTS SUPER DELUXE":
+  "FLOWER POTS SUper DELUXE":
     "/Diwali-product-images/diwali-FLOWER-POTS-SUPER-DELUXE.png",
   "FLOWER POTS Special Color":
     "/Diwali-product-images/diwali-FLOWER-POTS\u2013Special-Color.png",
@@ -93,20 +93,21 @@ const productImages = {
   "RED BIJILI": "/Diwali-product-images/diwali-RED BIJILI.jpg",
   "STRIPPED BIJILI": "/Diwali-product-images/diwali-STRIPPED-BIJILI.jpg",
   "ASSORTED CARTOON": "/Diwali-product-images/diwali-ASSORTED-CARTOON.jpg",
-  '2" LAKSHMI CRACKERS': "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
+  '2"" LAKSHMI CRACKERS':
+    "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
   "2 3\u20444 BIRD / LAKSHMI CRACKERS":
     "/Diwali-product-images/diwali-2-3by4-BIRD-LAKSHMI-CRACKERS.jpg",
   "3 1\u20442 LAKSHMI CRACKERS":
     "/Diwali-product-images/diwali-3-1by2-LAKSHMI-CRACKERS.jpg",
-  '4"LAKSHMI CRACKERS': "/Diwali-product-images/diwali-4-LAKSHMI-CRACKERS.jpg",
-  '4"ZIPPY / PANDA / DELUXE':
+  '4""LAKSHMI CRACKERS': "/Diwali-product-images/diwali-4-LAKSHMI-CRACKERS.jpg",
+  '4""ZIPPY / PANDA / DELUXE':
     "/Diwali-product-images/diwali-4-ZIPPY-PANDA-DELUXE.jpg",
-  '4" DRAGON DELUXE': "/Diwali-product-images/diwali-4-DRAGON-DELUXE.jpg",
-  '4" TWO SOUND CRACKERS':
+  '4"" DRAGON DELUXE': "/Diwali-product-images/diwali-4-DRAGON-DELUXE.jpg",
+  '4"" TWO SOUND CRACKERS':
     "/Diwali-product-images/diwali-4-TWO-SOUND-CRACKERS.jpg",
-  '4" THREE SOUND GREEN':
+  '4"" THREE SOUND GREEN':
     "/Diwali-product-images/diwali-4-THREE-SOUND-GREEN.jpg",
-  '4" GOLDEN APPLE': "/Diwali-product-images/diwali-4-GOLDEN-APPLE.jpg",
+  '4"" GOLDEN APPLE': "/Diwali-product-images/diwali-4-GOLDEN-APPLE.jpg",
   "24 DELUXE": "/Diwali-product-images/diwali-24-DELUXE.jpg",
   "32 DELUXE ROYAL": "/Diwali-product-images/diwali-32-DELUXE-ROYAL.jpg",
   "32 DELUXE SAFARI": "/Diwali-product-images/diwali-32-DELUXE-SAFARI.jpg",

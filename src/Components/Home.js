@@ -6,13 +6,13 @@ import OurProducts from "./OurProducts";
 import "../Styles/home.css";
 
 const images = [
-  "/Images/bgText.png",
-  "/Images/Diwali-image-3.jpg",
-  "/Images/Diwali-image-4.png",
-  "/Images/Diwali-image-8.jpg",
-  "/Images/image-5.png",
-  "/Images/image4.png",
-  "/Images/Chakaras.png",
+  "/Images/diwali-image-6.png",
+  "/Images/diwali-image-text2.png",
+  "/Images/diwali-image-text3.png",
+  "/Images/diwali-image-text.png",
+  "/Images/diwali-image-1.png",
+  "/Images/diwali-image-2.png",
+  "/Images/diwali-image-4.png",
 ];
 
 const Home = () => {

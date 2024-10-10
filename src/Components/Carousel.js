@@ -22,7 +22,7 @@ const Carousel = ({ images, onClick }) => {
           <div key={index} onClick={onClick}>
             <img
               src={`${process.env.PUBLIC_URL}${image}`}
-              alt={`Slide ${index + 1}`}
+              alt={`Diwali ${index + 1}`}
             />
           </div>
         ))}
