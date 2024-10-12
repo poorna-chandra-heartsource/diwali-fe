@@ -4,18 +4,18 @@ import { useNavigate } from "react-router-dom";
 import "../Styles/enquiryForm.css";
 import TermConditions from "./TermConditions";
 
-const EnquiryForm = ({ cartItems, setCartItems }) => {
+const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
   const [formData, setFormData] = useState({
-    full_name: "",
-    email: "",
-    mobile: "",
+    full_name: userData?.full_name || "",
+    email: userData?.email || "",
+    mobile: userData?.mobile || "",
     address: {
-      city: "",
-      state: "",
-      pincode: "",
-      addressLine1: "",
-      addressLine2: "",
-      landmark: "",
+      city: userData?.address?.city || "",
+      state: userData?.address?.state || "",
+      pincode: userData?.address?.pincode || "",
+      addressLine1: userData?.address?.addressLine1 || "",
+      addressLine2: userData?.address?.addressLine2 || "",
+      landmark: userData?.address?.landmark || "",
     },
     order: {
       total_price: 0,
@@ -29,6 +29,47 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userData) {
+      const userAddress = userData.user_address?.[0]; // Access the first address from the array
+      setFormData({
+        full_name: userData.full_name || "",
+        email: userData.email || "",
+        mobile: userData.mobile || "",
+        address: {
+          city: userAddress?.city || "",
+          state: userAddress?.state || "",
+          pincode: userAddress?.pincode || "",
+          addressLine1: userAddress?.addressLine1 || "",
+          addressLine2: userAddress?.addressLine2 || "",
+          landmark: userAddress?.landmark || "",
+        },
+        order: {
+          total_price: 0,
+          orderItems: [],
+        },
+      });
+    } else {
+      setFormData({
+        full_name: "",
+        email: "",
+        mobile: "",
+        address: {
+          city: "",
+          state: "",
+          pincode: "",
+          addressLine1: "",
+          addressLine2: "",
+          landmark: "",
+        },
+        order: {
+          total_price: 0,
+          orderItems: [],
+        },
+      });
+    }
+  }, [userData]);
 
   useEffect(() => {
     const orderItems = cartItems.map((item) => ({
@@ -226,6 +267,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
                 name="full_name"
                 value={formData.full_name}
                 onChange={handleInputChange}
+                disabled={!!userData}
                 className={errors.email ? "error-input" : ""}
                 style={{
                   border: errors.full_name
@@ -247,6 +289,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
+                disabled={!!userData}
                 className={errors.email ? "error-input" : ""}
                 style={{
                   border: errors.email
@@ -267,6 +310,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
                 name="mobile"
                 value={formData.mobile}
                 onChange={handleInputChange}
+                disabled={!!userData}
                 className={errors.mobile ? "error-input" : ""}
                 style={{
                   border: errors.mobile
@@ -293,6 +337,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
               placeholder="House number and street name"
               value={formData.address.addressLine1}
               onChange={handleInputChange}
+              disabled={!!userData}
               className={errors.addressLine1 ? "error-input" : ""}
               style={{
                 border: errors.addressLine1
@@ -312,6 +357,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
               placeholder="Apartment, suite, unit, etc. (optional)"
               value={formData.address.addressLine2}
               onChange={handleInputChange}
+              disabled={!!userData}
             />
           </div>
           <div className="form-row">
@@ -322,6 +368,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
                 name="city"
                 value={formData.address.city}
                 onChange={handleInputChange}
+                disabled={!!userData}
                 className={errors.city ? "error-input" : ""}
                 style={{
                   border: errors.city
@@ -340,6 +387,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
                 name="landmark"
                 value={formData.address.landmark}
                 onChange={handleInputChange}
+                disabled={!!userData}
               />
             </div>
           </div>
@@ -351,6 +399,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
                 name="pincode"
                 value={formData.address.pincode}
                 onChange={handleInputChange}
+                disabled={!!userData}
                 className={errors.pincode ? "error-input" : ""}
                 style={{
                   border: errors.pincode
@@ -371,6 +420,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
                 name="state"
                 value={formData.address.state}
                 onChange={handleInputChange}
+                disabled={!!userData}
                 className={errors.state ? "error-input" : ""}
                 style={{
                   border: errors.state

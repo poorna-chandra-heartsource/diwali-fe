@@ -11,6 +11,7 @@ import OrderDetails from "./Components/OrderDetails";
 import OrderList from "./Components/OrderList";
 import ForgotPassword from "./Components/ForgotPassword";
 import ResetPassword from "./Components/ResetPassword";
+import UserEnquiry from "./Components/UserEnquiry";
 import "./Styles/app.css";
 
 const App = () => {
@@ -63,12 +64,10 @@ const App = () => {
             <Route
               path="/products"
               element={
-                <>
-                  <Shop
-                    onAddToCart={handleAddToCart}
-                    selectedCategory={selectedCategory}
-                  />
-                </>
+                <Shop
+                  onAddToCart={handleAddToCart}
+                  selectedCategory={selectedCategory}
+                />
               }
             />
             <Route
@@ -77,20 +76,29 @@ const App = () => {
                 <Cart cartItems={cartItems} setCartItems={setCartItems} />
               }
             />
+
             <Route
-              path="enquiryForm"
+              path="/enquiryForm"
               element={
-                <EnquiryForm
-                  cartItems={cartItems}
-                  setCartItems={setCartItems}
-                />
+                isLoggedIn ? (
+                  <UserEnquiry
+                    cartItems={cartItems}
+                    setCartItems={setCartItems}
+                  />
+                ) : (
+                  <EnquiryForm
+                    cartItems={cartItems}
+                    setCartItems={setCartItems}
+                  />
+                )
               }
             />
+
             <Route
               path="/login"
               element={<Login setIsLoggedIn={setIsLoggedIn} />}
             />
-            <Route path="/terms-and-conditions" component={TermConditions} />
+            <Route path="/terms-and-conditions" element={<TermConditions />} />
             <Route path="/order-details" element={<OrderDetails />} />
             <Route path="/order-list" element={<OrderList />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />

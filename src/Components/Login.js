@@ -60,6 +60,8 @@ const Login = ({ setIsLoggedIn }) => {
       let { token, id, firstName } = response.data;
 
       localStorage.setItem("token", token);
+      localStorage.setItem("userId", id);
+      localStorage.setItem("userName", firstName);
 
       setNotification({
         message: "Login successful!",
@@ -71,7 +73,9 @@ const Login = ({ setIsLoggedIn }) => {
         password: "",
       });
 
-      navigate("/order-list", { state: { userId: id, userName: firstName } });
+      navigate("/order-list", {
+        state: { userId: id, userName: firstName, userToken: token },
+      });
     } catch (error) {
       setNotification({
         message: "Failed to login. Please try again.",

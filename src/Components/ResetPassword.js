@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../Styles/resetPassword.css";
 
@@ -9,6 +9,16 @@ const ResetPassword = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const tokenValue = queryParams.get("token");
+    if (tokenValue) {
+      setToken(tokenValue);
+    }
+  }, [location.search]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,11 +35,12 @@ const ResetPassword = () => {
       const response = await axios.post(
         "http://127.0.0.1:8000/auth/reset-password",
         {
+          token: token,
           password: password,
         }
       );
 
-      if (response.status === 200) {
+      if (response.status === 200 || response.status === 201) {
         setSuccess("Password has been reset successfully!");
 
         setTimeout(() => {

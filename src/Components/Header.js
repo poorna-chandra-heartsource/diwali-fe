@@ -11,6 +11,8 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
   };
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userName");
     setIsLoggedIn(false);
     navigate("/login");
   };
