@@ -23,7 +23,7 @@ const Shop = ({ onAddToCart }) => {
     const fetchProducts = async () => {
       try {
         const response = await axios.post(
-          `http://127.0.0.1:8000/products/fetch?sort_field=name&sort_order=asc&page=1&limit=70`
+          `http://127.0.0.1:8000/products/fetch?sort_field=name&sort_order=asc&page=1&limit=200`
         );
         const fetchedProducts = response.data.data.map((product) => ({
           _id: product._id,
@@ -32,6 +32,7 @@ const Shop = ({ onAddToCart }) => {
           rate_in_rs: product.rate_in_rs,
           image: productImages[product.name] || "/Images/placeholder.png",
         }));
+
         setAllProducts(fetchedProducts);
         setProducts(fetchedProducts);
       } catch (error) {
@@ -152,6 +153,7 @@ const Shop = ({ onAddToCart }) => {
           {products.map((product) => (
             <div key={product._id} onClick={() => handleProductClick(product)}>
               <ProductCard
+                _id={product._id}
                 name={product.name}
                 rate_in_rs={product.rate_in_rs}
                 image={product.image}

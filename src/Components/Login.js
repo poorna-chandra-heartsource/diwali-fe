@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/login.css";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -57,7 +57,7 @@ const Login = () => {
         password: formData.password,
       });
 
-      const { token } = response.data;
+      let { token, id, firstName } = response.data;
 
       localStorage.setItem("token", token);
 
@@ -65,13 +65,13 @@ const Login = () => {
         message: "Login successful!",
         type: "success",
       });
-
+      setIsLoggedIn(true);
       setFormData({
         email: "",
         password: "",
       });
 
-      navigate("/order-details");
+      navigate("/order-list", { state: { userId: id, userName: firstName } });
     } catch (error) {
       setNotification({
         message: "Failed to login. Please try again.",
@@ -144,9 +144,9 @@ const Login = () => {
         </p>
       )}
 
-      <a href="/forgot-password" className="forgot-password-link">
+      <Link to="/forgot-password" className="forgot-password-link">
         Forgot password?
-      </a>
+      </Link>
     </div>
   );
 };

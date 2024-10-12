@@ -8,80 +8,23 @@ import EnquiryForm from "./Components/EnquiryForm";
 import Login from "./Components/Login";
 import TermConditions from "./Components/TermConditions";
 import OrderDetails from "./Components/OrderDetails";
+import OrderList from "./Components/OrderList";
+import ForgotPassword from "./Components/ForgotPassword";
+import ResetPassword from "./Components/ResetPassword";
 import "./Styles/app.css";
 
 const App = () => {
-  const userOrders = [
-    {
-      name: "10 CM COLOR SPARKLERS",
-      quantity: 22,
-      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
-      subtotal: 2220,
-    },
-    {
-      name: "10 CM ELECTRIC SPARKLERS",
-      quantity: 30,
-      image: "/Diwali-product-images/diwali-SPYDER.jpg",
-      subtotal: 3820,
-    },
-    {
-      name: "10 CM COLOR SPARKLERS",
-      quantity: 22,
-      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
-      subtotal: 2220,
-    },
-    {
-      name: "10 CM ELECTRIC SPARKLERS",
-      quantity: 30,
-      image: "/Diwali-product-images/diwali-SPYDER.jpg",
-      subtotal: 3820,
-    },
-    {
-      name: "10 CM COLOR SPARKLERS",
-      quantity: 22,
-      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
-      subtotal: 2220,
-    },
-    {
-      name: "10 CM ELECTRIC SPARKLERS",
-      quantity: 30,
-      image: "/Diwali-product-images/diwali-SPYDER.jpg",
-      subtotal: 3820,
-    },
-    {
-      name: "10 CM COLOR SPARKLERS",
-      quantity: 22,
-      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
-      subtotal: 2220,
-    },
-    {
-      name: "10 CM ELECTRIC SPARKLERS",
-      quantity: 30,
-      image: "/Diwali-product-images/diwali-SPYDER.jpg",
-      subtotal: 3820,
-    },
-    {
-      name: "10 CM COLOR SPARKLERS",
-      quantity: 22,
-      image: "/Diwali-product-images/diwali-2-LAKSHMI-CRACKERS.jpg",
-      subtotal: 2220,
-    },
-    {
-      name: "10 CM ELECTRIC SPARKLERS",
-      quantity: 30,
-      image: "/Diwali-product-images/diwali-SPYDER.jpg",
-      subtotal: 3820,
-    },
-  ];
   const [cartItems, setCartItems] = useState(() => {
-    // Load cart items from localStorage if they exist
     const savedCartItems = localStorage.getItem("cartItems");
     return savedCartItems ? JSON.parse(savedCartItems) : [];
   });
 
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    return !!localStorage.getItem("token");
+  });
+
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  // Save cart items to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -109,7 +52,11 @@ const App = () => {
   return (
     <Router>
       <div className="app">
-        <Header cartCount={cartCount} />
+        <Header
+          cartCount={cartCount}
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+        />
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -139,12 +86,15 @@ const App = () => {
                 />
               }
             />
-            <Route path="/login" element={<Login />} />
-            <Route path="/terms-and-conditions" component={TermConditions} />
             <Route
-              path="/order-details"
-              element={<OrderDetails orders={userOrders} />}
+              path="/login"
+              element={<Login setIsLoggedIn={setIsLoggedIn} />}
             />
+            <Route path="/terms-and-conditions" component={TermConditions} />
+            <Route path="/order-details" element={<OrderDetails />} />
+            <Route path="/order-list" element={<OrderList />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>
         </div>
       </div>

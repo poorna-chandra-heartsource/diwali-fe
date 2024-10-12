@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../Styles/enquiryForm.css";
 import TermConditions from "./TermConditions";
 
@@ -23,11 +24,15 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
   });
   const [notification, setNotification] = useState({ message: "", type: "" });
   const [errors, setErrors] = useState({});
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const orderItems = cartItems.map((item) => ({
-      product_id: item.id,
+      product_id: item._id,
       quantity: item.quantity,
       price: item.rate_in_rs,
     }));
@@ -109,8 +114,12 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
   };
 
   const handleSubmit = async () => {
+    //spinner
+    setIsSubmitting(true);
+
     //if cart is empty
     if (cartItems.length === 0) {
+      setIsSubmitting(false);
       setNotification({
         message:
           "Your cart is empty! Please add items to the cart before submitting an inquiry.",
@@ -122,6 +131,7 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
       return;
     }
     if (!validateForm()) {
+      setIsSubmitting(false);
       return;
     }
 
@@ -131,11 +141,6 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
         formData
       );
       if (response.status === 200 || response.status === 201) {
-        setNotification({
-          message:
-            "Your Inquiry has sent succsessfully ! Please check your email for more details.",
-          type: "success",
-        });
         setFormData({
           full_name: "",
           email: "",
@@ -153,9 +158,11 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
             orderItems: [],
           },
         });
-        // Clear the cart after successful submission
-        setCartItems([]); // Clear cart in state
-        localStorage.removeItem("cartItems"); // Remove from localStorage
+
+        setCartItems([]);
+        localStorage.removeItem("cartItems");
+
+        setSuccessModalOpen(true);
       } else {
         setNotification({
           message: "Failed to create user. Please try again.",
@@ -178,10 +185,17 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
           type: "error",
         });
       }
+    } finally {
+      setIsSubmitting(false);
     }
     setTimeout(() => {
       setNotification({ message: "", type: "" });
     }, 7000);
+  };
+
+  const handleSuccessModalClose = () => {
+    setSuccessModalOpen(false);
+    navigate("/products");
   };
 
   const getSubtotalPrice = () => {
@@ -193,6 +207,14 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
 
   return (
     <div className="form-order-container">
+      {isSubmitting && (
+        <div className="spinner-overlay">
+          <div className="successSpinner"></div>
+          <p className="spinner-text">
+            Please wait, your inquiry is being sent...
+          </p>
+        </div>
+      )}
       <div className="form-container">
         <h2>Fill your details</h2>
         <form>
@@ -422,7 +444,11 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
           </div>
         </div>
         <br />
-        <button className="submitBtn" onClick={handleSubmit}>
+        <button
+          className="submitBtn"
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+        >
           Send Inquiry
         </button>
       </div>
@@ -431,6 +457,16 @@ const EnquiryForm = ({ cartItems, setCartItems }) => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+      {/* Success Modal */}
+      {successModalOpen && (
+        <div className="success-modal">
+          <p>
+            Your Inquiry has sent succsessfully ! <br /> Please check your email
+            for more details.
+          </p>
+          <button onClick={handleSuccessModalClose}>Close</button>
+        </div>
+      )}
     </div>
   );
 };

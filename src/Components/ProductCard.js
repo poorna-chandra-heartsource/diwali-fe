@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Spinner from "./Spinner";
 import "../Styles/productCard.css";
 
-const ProductCard = ({ name, rate_in_rs, image, onAddToCart }) => {
+const ProductCard = ({ _id, name, rate_in_rs, image, onAddToCart }) => {
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState("");
 
@@ -13,7 +13,7 @@ const ProductCard = ({ name, rate_in_rs, image, onAddToCart }) => {
 
     setTimeout(() => {
       if (onAddToCart) {
-        onAddToCart({ name, rate_in_rs, image }, 1);
+        onAddToCart({ _id, name, rate_in_rs, image }, 1);
         setNotification("Added to Cart");
       }
       setLoading(false);

@@ -11,8 +11,11 @@
 
 .order-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(
+    2,
+    1fr
+  ); /* Two equal-width columns for larger screens */
+  gap: 20px; /* Spacing between columns */
 }
 
 .order-item {
@@ -58,35 +61,10 @@
   margin-bottom: 20px;
 }
 
-.back-button {
-  background-color: #ff4d4d;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 20px;
-  margin-left: 30%;
-  transition: background-color 0.3s ease;
-}
-
-.back-button:hover {
-  background-color: #f03434;
-}
-
-.back-button:focus {
-  outline: none;
-}
-
-.back-button:active {
-  background-color: #ff4d4d;
-}
-
-/* Tablet view*/
+/* Tablet view: 1 column */
 @media (max-width: 768px) {
   .order-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column for tablet screens */
   }
 
   .order-details-container {
@@ -116,7 +94,7 @@
 /* Mobile Version (max-width: 480px) */
 @media (max-width: 480px) {
   .order-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column for mobile screens */
   }
 
   .order-details-container {
@@ -125,15 +103,15 @@
   }
 
   .order-item {
-    flex-direction: column;
+    flex-direction: column; /* Stack the image and description vertically */
     text-align: center;
     padding: 10px;
   }
 
   .order-image {
-    width: 70px;
+    width: 70px; /* Further reduce image size for small screens */
     height: 70px;
-    margin: 0 auto 10px;
+    margin: 0 auto 10px; /* Center image for small screens */
   }
 
   .order-description h3 {

@@ -31,7 +31,16 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
     setNotification("");
     setTimeout(() => {
       if (onAddToCart && quantity > 0) {
-        onAddToCart(product, quantity);
+        onAddToCart(
+          {
+            _id: product._id,
+            name: product.name,
+            rate_in_rs: product.rate_in_rs,
+            image: product.image,
+          },
+          quantity
+        );
+
         setNotification("Added to Cart");
       }
       setLoading(false);

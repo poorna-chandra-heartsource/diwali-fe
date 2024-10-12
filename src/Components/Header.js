@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styles/header.css";
 
-const Header = ({ cartCount }) => {
+const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/login");
   };
 
   return (
@@ -23,9 +28,15 @@ const Header = ({ cartCount }) => {
           <li>
             <a href="/products">Products</a>
           </li>
-          <li>
-            <a href="/login">Login</a>
-          </li>
+          {isLoggedIn ? (
+            <li onClick={handleLogout}>
+              <a href="#">Logout</a>
+            </li>
+          ) : (
+            <li>
+              <a href="/login">Login</a>
+            </li>
+          )}
         </ul>
         <div className="hamburger" onClick={toggleMenu}>
           <span></span>
