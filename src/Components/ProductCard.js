@@ -25,23 +25,26 @@ const ProductCard = ({ _id, name, rate_in_rs, image, onAddToCart }) => {
   };
 
   return (
-    <div className="product-card">
-      <img src={image} alt={name} />
-      <div className="product-info">
-        <p className="product-name">{name}</p>
-        <p className="new-price">₹{rate_in_rs}</p>
-      </div>
-
-      <button
-        className="enquiry-btn"
-        onClick={handleAddToCart}
-        disabled={loading}
-      >
-        {loading ? <Spinner /> : "Add to Cart"}
-      </button>
+    <>
+      {" "}
       {/* Notification Message display*/}
       {notification && <div className="notification">{notification}</div>}
-    </div>
+      <div className="product-card">
+        <img src={image} alt={name} />
+        <div className="product-info">
+          <p className="product-name">{name}</p>
+          <p className="new-price">₹{rate_in_rs}</p>
+        </div>
+
+        <button
+          className="enquiry-btn"
+          onClick={handleAddToCart}
+          disabled={loading}
+        >
+          {loading ? <Spinner /> : "Add to Cart"}
+        </button>
+      </div>
+    </>
   );
 };
 

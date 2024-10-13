@@ -77,8 +77,10 @@ const Login = ({ setIsLoggedIn }) => {
         state: { userId: id, userName: firstName, userToken: token },
       });
     } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "Failed to login. Please try again.";
       setNotification({
-        message: "Failed to login. Please try again.",
+        message: errorMessage,
         type: "error",
       });
     }
@@ -140,8 +142,8 @@ const Login = ({ setIsLoggedIn }) => {
         <p
           className={`notification ${
             notification.type === "success"
-              ? "notification-success"
-              : "notification-error"
+              ? "login-notification-success"
+              : "login-notification-error"
           }`}
         >
           {notification.message}

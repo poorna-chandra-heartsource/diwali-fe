@@ -13,6 +13,7 @@ const Shop = ({ onAddToCart }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
   const [sortOption, setSortOption] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState(
@@ -37,6 +38,8 @@ const Shop = ({ onAddToCart }) => {
         setProducts(fetchedProducts);
       } catch (error) {
         console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching
       }
     };
 
@@ -91,84 +94,95 @@ const Shop = ({ onAddToCart }) => {
       </div>
 
       <div className="shop-content">
-        <div className="shop-header">
-          <h2>Products</h2>
-
-          <div className="sort-options">
-            <div className="sort-dropdown">
-              <button
-                className="sort-dropdown-btn"
-                onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-              >
-                {sortOption === null
-                  ? "Sort by price"
-                  : sortOption === "price: low-to-high"
-                  ? "Price : Low to high"
-                  : "Price : High to low"}
-
-                <span className="sort-arrows">
-                  {sortOption === null && (
-                    <>
-                      <span className="arrow-up">▲</span>
-                      <span className="arrow-down">▼</span>
-                    </>
-                  )}
-                  {sortOption === "price: low-to-high" && (
-                    <span className="arrow-up">▲</span>
-                  )}
-                  {sortOption === "price: high-to-low" && (
-                    <span className="arrow-down">▼</span>
-                  )}
-                </span>
-              </button>
-
-              {isSortDropdownOpen && (
-                <div
-                  className={`sort-dropdown-content ${
-                    isSortDropdownOpen ? "show" : ""
-                  }`}
-                >
-                  <div
-                    className="sort-item"
-                    onClick={() => handleSort("price: low-to-high")}
-                  >
-                    Low to high
-                  </div>
-                  <div
-                    className="sort-item"
-                    onClick={() => handleSort("price: high-to-low")}
-                  >
-                    High to low
-                  </div>
-                </div>
-              )}
-            </div>
+        {loading ? (
+          <div className="shop-spinner-container">
+            <div className="shop-spinner"></div>{" "}
           </div>
-        </div>
-        <p>
-          <sup>*</sup>Images are for display purposes only. The actual product
-          may differ from the image shown.
-        </p>
-        <div className="product-grid">
-          {products.map((product) => (
-            <div key={product._id} onClick={() => handleProductClick(product)}>
-              <ProductCard
-                _id={product._id}
-                name={product.name}
-                rate_in_rs={product.rate_in_rs}
-                image={product.image}
+        ) : (
+          <>
+            <div className="shop-header">
+              <h2>Products</h2>
+
+              <div className="sort-options">
+                <div className="sort-dropdown">
+                  <button
+                    className="sort-dropdown-btn"
+                    onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+                  >
+                    {sortOption === null
+                      ? "Sort by price"
+                      : sortOption === "price: low-to-high"
+                      ? "Price : Low to high"
+                      : "Price : High to low"}
+
+                    <span className="sort-arrows">
+                      {sortOption === null && (
+                        <>
+                          <span className="arrow-up">▲</span>
+                          <span className="arrow-down">▼</span>
+                        </>
+                      )}
+                      {sortOption === "price: low-to-high" && (
+                        <span className="arrow-up">▲</span>
+                      )}
+                      {sortOption === "price: high-to-low" && (
+                        <span className="arrow-down">▼</span>
+                      )}
+                    </span>
+                  </button>
+
+                  {isSortDropdownOpen && (
+                    <div
+                      className={`sort-dropdown-content ${
+                        isSortDropdownOpen ? "show" : ""
+                      }`}
+                    >
+                      <div
+                        className="sort-item"
+                        onClick={() => handleSort("price: low-to-high")}
+                      >
+                        Low to high
+                      </div>
+                      <div
+                        className="sort-item"
+                        onClick={() => handleSort("price: high-to-low")}
+                      >
+                        High to low
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+            <p>
+              <sup>*</sup>Images are for display purposes only. The actual
+              product may differ from the image shown.
+            </p>
+            <div className="product-grid">
+              {products.map((product) => (
+                <div
+                  key={product._id}
+                  onClick={() => handleProductClick(product)}
+                >
+                  <ProductCard
+                    _id={product._id}
+                    name={product.name}
+                    rate_in_rs={product.rate_in_rs}
+                    image={product.image}
+                    onAddToCart={onAddToCart}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {selectedProduct && (
+              <ProductModal
+                product={selectedProduct}
+                onClose={handleCloseModal}
                 onAddToCart={onAddToCart}
               />
-            </div>
-          ))}
-        </div>
-
-        {selectedProduct && (
-          <ProductModal
-            product={selectedProduct}
-            onClose={handleCloseModal}
-            onAddToCart={onAddToCart}
-          />
+            )}
+          </>
         )}
       </div>
     </div>

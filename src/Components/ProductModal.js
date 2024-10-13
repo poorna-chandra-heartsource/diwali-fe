@@ -71,9 +71,12 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
               className="quantity-input"
               value={quantity}
               onChange={handleInputChange}
+              onFocus={() => quantity === 0 && setQuantity("")}
+              onBlur={() => quantity === "" && setQuantity(0)}
               min="0"
               max="100"
             />
+
             <button className="quantity-btn" onClick={handleIncrement}>
               +
             </button>

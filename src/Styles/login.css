@@ -98,6 +98,31 @@ input.error-input {
   text-decoration: underline;
 }
 
+.login-notification-success {
+  background-color: #28a745;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  z-index: 9999;
+  width: 100%;
+  text-align: center;
+}
+.login-notification-error {
+  background-color: #dc3545;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  z-index: 9999;
+  width: 100%;
+  text-align: center;
+}
+
 /* Mobile Version */
 @media (max-width: 768px) {
   .login-container {
