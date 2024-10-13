@@ -62,7 +62,6 @@ const OrderDetails = () => {
                 <h3>{item.productName}</h3>
                 <p>Quantity: {item.quantity}</p>
                 <p>Price: ₹{item.price}</p>
-                {/* <p>Subtotal: ₹{item.price * item.quantity}</p> */}
               </div>
             </div>
           </div>

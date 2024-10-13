@@ -10,8 +10,8 @@ const OrderList = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const userId = location.state?.userId;
-  const userName = location.state?.userName;
+  const userId = location.state?.userId || localStorage.getItem("userId");
+  const userName = location.state?.userName || localStorage.getItem("userName");
 
   useEffect(() => {
     const fetchOrders = async () => {

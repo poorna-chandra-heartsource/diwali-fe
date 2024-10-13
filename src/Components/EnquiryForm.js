@@ -32,7 +32,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
 
   useEffect(() => {
     if (userData) {
-      const userAddress = userData.user_address?.[0]; // Access the first address from the array
+      const userAddress = userData.user_address?.[0];
       setFormData({
         full_name: userData.full_name || "",
         email: userData.email || "",
@@ -141,11 +141,14 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
     if (!formData.address.city.trim()) {
       newErrors.city = "City is required *";
     }
-    if (!formData.address.pincode.trim()) {
+
+    const pincode = String(formData.address.pincode);
+    if (!pincode.trim()) {
       newErrors.pincode = "Pincode is required *";
-    } else if (!pincodeRegex.test(formData.address.pincode)) {
+    } else if (!pincodeRegex.test(pincode)) {
       newErrors.pincode = "Pincode must be 6 digits *";
     }
+
     if (!formData.address.state.trim()) {
       newErrors.state = "State is required *";
     }
@@ -177,10 +180,32 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
     }
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/users",
-        formData
-      );
+      let apiUrl;
+      let dataToSend;
+
+      const formDataWithStringPincode = {
+        ...formData,
+        address: {
+          ...formData.address,
+          pincode: String(formData.address.pincode),
+        },
+      };
+      //if user is loggedIn
+      if (userData && userData.token) {
+        apiUrl = "http://127.0.0.1:8000/orders";
+        dataToSend = formDataWithStringPincode.order;
+      } else {
+        // If user is not logged in
+        apiUrl = "http://127.0.0.1:8000/users";
+        dataToSend = formDataWithStringPincode;
+      }
+      const config = {
+        headers: {
+          Authorization:
+            userData && userData.token ? `Bearer ${userData.token}` : "",
+        },
+      };
+      const response = await axios.post(apiUrl, dataToSend, config);
       if (response.status === 200 || response.status === 201) {
         setFormData({
           full_name: "",

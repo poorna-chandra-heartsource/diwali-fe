@@ -100,7 +100,11 @@ const App = () => {
             />
             <Route path="/terms-and-conditions" element={<TermConditions />} />
             <Route path="/order-details" element={<OrderDetails />} />
-            <Route path="/order-list" element={<OrderList />} />
+            <Route
+              path="/order-list"
+              setIsLoggedIn={setIsLoggedIn}
+              element={<OrderList />}
+            />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
           </Routes>

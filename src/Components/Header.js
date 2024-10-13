@@ -30,9 +30,16 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
           <li>
             <a href="/products">Products</a>
           </li>
+          {isLoggedIn && (
+            <>
+              <li>
+                <a href="/order-list">Orders</a>
+              </li>
+            </>
+          )}
           {isLoggedIn ? (
             <li onClick={handleLogout}>
-              <a href="#">Logout</a>
+              <a href="#/">Logout</a>
             </li>
           ) : (
             <li>

@@ -26,7 +26,7 @@ const ForgotPassword = () => {
       if (response.status === 200 || response.status === 201) {
         setSuccess("Password reset instructions have been sent to your email.");
 
-        // Optionally, navigate to login after a short delay
+        // navigate to login
         setTimeout(() => navigate("/login"), 5000);
       } else {
         setError("Failed to send password reset request.");

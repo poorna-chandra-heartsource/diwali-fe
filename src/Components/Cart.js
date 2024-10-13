@@ -121,7 +121,7 @@ const Cart = ({ cartItems, setCartItems }) => {
                     </div>
                   </div>
                   <p className="cart-item-subtotal">
-                    Subtotal: ₹{item.rate_in_rs * item.quantity}
+                    Subtotal: ₹{(item.rate_in_rs || 0) * (item.quantity || 0)}
                   </p>
                 </div>
                 <button
