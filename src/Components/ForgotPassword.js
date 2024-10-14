@@ -17,7 +17,7 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/auth/forgot-password",
+        "http://127.0.0.1:3001/auth/forgot-password",
         {
           email: email,
         }

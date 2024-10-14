@@ -12,7 +12,7 @@ const OurProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/products/categories"
+          "http://127.0.0.1:3001/products/categories"
         );
         const fetchedProducts = response.data.map((product, index) => ({
           id: index + 1,

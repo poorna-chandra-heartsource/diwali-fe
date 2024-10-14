@@ -16,9 +16,16 @@ const OrderList = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
+        let token = localStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        };
         const response = await axios.post(
-          "http://127.0.0.1:8000/orders/fetch?sort_field=serial_number&sort_order=asc&page=1&limit=70",
-          { user_id: userId }
+          "http://127.0.0.1:3001/orders/fetch?sort_field=serial_number&sort_order=asc&page=1&limit=70",
+          {},
+          config
         );
         setOrders(response.data.data);
       } catch (err) {

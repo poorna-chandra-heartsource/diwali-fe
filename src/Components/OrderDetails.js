@@ -15,8 +15,15 @@ const OrderDetails = () => {
   useEffect(() => {
     const fetchOrderDetails = async () => {
       try {
+        let token = localStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+        };
         const response = await axios.get(
-          `http://127.0.0.1:8000/orders/${orderId}`
+          `http://127.0.0.1:3001/orders/${orderId}`,
+          config
         );
         setOrder(response.data);
       } catch (err) {

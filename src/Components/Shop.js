@@ -24,7 +24,7 @@ const Shop = ({ onAddToCart }) => {
     const fetchProducts = async () => {
       try {
         const response = await axios.post(
-          `http://127.0.0.1:8000/products/fetch?sort_field=name&sort_order=asc&page=1&limit=200`
+          `http://127.0.0.1:3001/products/fetch?sort_field=name&sort_order=asc&page=1&limit=200`
         );
         const fetchedProducts = response.data.data.map((product) => ({
           _id: product._id,

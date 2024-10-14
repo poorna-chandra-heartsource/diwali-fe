@@ -9,7 +9,7 @@ const Sidebar = ({ onCategorySelect, selectedCategory }) => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/products/categories"
+          "http://127.0.0.1:3001/products/categories"
         );
         const fetchedCategories = response.data.map((category) => ({
           name: category.product_category,

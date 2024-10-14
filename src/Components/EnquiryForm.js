@@ -190,22 +190,28 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
           pincode: String(formData.address.pincode),
         },
       };
+      const token = localStorage.getItem("token");
+      const headerConfig = {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+      };
       //if user is loggedIn
-      if (userData && userData.token) {
-        apiUrl = "http://127.0.0.1:8000/orders";
+      if (token) {
+        apiUrl = "http://127.0.0.1:3001/orders";
         dataToSend = formDataWithStringPincode.order;
       } else {
         // If user is not logged in
-        apiUrl = "http://127.0.0.1:8000/users";
+        apiUrl = "http://127.0.0.1:3001/users";
         dataToSend = formDataWithStringPincode;
       }
-      const config = {
-        headers: {
-          Authorization:
-            userData && userData.token ? `Bearer ${userData.token}` : "",
-        },
-      };
-      const response = await axios.post(apiUrl, dataToSend, config);
+      // const config = {
+      //   headers: {
+      //     Authorization:
+      //       userData && userData.token ? `Bearer ${userData.token}` : "",
+      //   },
+      // };
+      const response = await axios.post(apiUrl, dataToSend, headerConfig);
       if (response.status === 200 || response.status === 201) {
         setFormData({
           full_name: "",

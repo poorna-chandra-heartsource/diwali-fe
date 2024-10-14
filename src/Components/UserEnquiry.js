@@ -18,7 +18,7 @@ const UserEnquiry = ({ cartItems, setCartItems }) => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/users/${userId}`
+          `http://127.0.0.1:3001/users/${userId}`
         );
         setUserData(response.data);
       } catch (error) {
