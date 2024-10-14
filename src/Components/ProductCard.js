@@ -28,7 +28,6 @@ const ProductCard = ({ _id, name, rate_in_rs, image, onAddToCart }) => {
   return (
     <>
       {" "}
-      {/* Notification Message display*/}
       {notification && <div className="notification">{notification}</div>}
       <div className="product-card">
         <img src={image} alt={name} />

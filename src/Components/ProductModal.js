@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Spinner from "./Spinner";
 import "../Styles/productModal.css";
 import { formatPrice } from "../utils";
@@ -7,8 +8,27 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
   const [quantity, setQuantity] = useState(0);
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState("");
+  const [giftBoxItems, setGiftBoxItems] = useState([]);
+  const [itemsLoading, setItemsLoading] = useState(false);
 
-  if (!product) return null;
+  useEffect(() => {
+    if (product?.name) {
+      setItemsLoading(true);
+      const apiUrl = `http://127.0.0.1:3001/giftbox?name=${encodeURIComponent(
+        product.name
+      )}`;
+      axios
+        .get(apiUrl)
+        .then((response) => {
+          setGiftBoxItems(response.data.items || []);
+          setItemsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching gift box items:", error);
+          setItemsLoading(false);
+        });
+    }
+  }, [product?.name]);
 
   const handleIncrement = () => {
     if (quantity < 100) {
@@ -45,56 +65,96 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
         setNotification("Added to Cart");
       }
       setLoading(false);
-      // Remove notification after 3 seconds
+
       setTimeout(() => {
         setNotification("");
       }, 3000);
     }, 2000);
   };
 
+  if (!product) return null;
+
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="close-button" onClick={onClose}>
-          &times;
-        </button>
-        <img src={product.image} alt={product.name} className="modal-image" />
-        <div className="modal-info">
-          <h2>{product.name}</h2>
-          <p className="new-price">₹ {formatPrice(product.rate_in_rs)}</p>
+    <>
+      {notification && <div className="notification">{notification}</div>}
+      <div className="modal-overlay" onClick={onClose}>
+        <div
+          className={`modal-content ${
+            giftBoxItems.length > 0 ? "modal-large" : ""
+          }`}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button className="close-button" onClick={onClose}>
+            &times;
+          </button>
 
-          <div className="quantity-control">
-            <button className="quantity-btn" onClick={handleDecrement}>
-              -
-            </button>
-            <input
-              type="number"
-              className="quantity-input"
-              value={quantity}
-              onChange={handleInputChange}
-              onFocus={() => quantity === 0 && setQuantity("")}
-              onBlur={() => quantity === "" && setQuantity(0)}
-              min="0"
-              max="100"
-            />
+          <div className="modal-body">
+            {/* Left side */}
+            <div className="modal-left">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="modal-image"
+              />
+              <div className="modal-info">
+                <h2>{product.name}</h2>
+                <p className="new-price">₹ {formatPrice(product.rate_in_rs)}</p>
+                <div className="quantity-control">
+                  <button className="quantity-btn" onClick={handleDecrement}>
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    className="quantity-input"
+                    value={quantity}
+                    onChange={handleInputChange}
+                    min="0"
+                    max="100"
+                  />
+                  <button className="quantity-btn" onClick={handleIncrement}>
+                    +
+                  </button>
+                  <button
+                    className="enquiry-btn"
+                    onClick={handleAddtoCart}
+                    disabled={loading}
+                  >
+                    {loading ? <Spinner /> : "Add to Cart"}
+                  </button>
+                </div>
+              </div>
+            </div>
 
-            <button className="quantity-btn" onClick={handleIncrement}>
-              +
-            </button>
-
-            <button
-              className="enquiry-btn"
-              onClick={handleAddtoCart}
-              disabled={loading}
-            >
-              {loading ? <Spinner /> : " Add to Cart"}
-            </button>
+            {/* Right side: List of items */}
+            {giftBoxItems.length > 0 && (
+              <div className="modal-right">
+                <h3>Items in this Gift Box:</h3>
+                {itemsLoading ? (
+                  <Spinner />
+                ) : (
+                  <table className="giftbox-items-table">
+                    <thead>
+                      <tr>
+                        <th>Products</th>
+                        <th>Quantity</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {giftBoxItems.map((item) => (
+                        <tr key={item._id}>
+                          <td>{item.product}</td>
+                          <td>{item.quantity}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            )}
           </div>
-          {/* Notification Message display */}
-          {notification && <div className="notification">{notification}</div>}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
