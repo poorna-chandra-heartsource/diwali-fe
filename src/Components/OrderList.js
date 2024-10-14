@@ -45,7 +45,7 @@ const OrderList = () => {
   return (
     <div className="order-details-container">
       <h3>Welcome, {userName}</h3>
-      <h3>Order List</h3>
+      <h3>Inquiry List</h3>
       {error && <p className="error-message">{error}</p>}
       <div className="order-grid">
         {orders.length > 0 ? (
@@ -58,14 +58,14 @@ const OrderList = () => {
             >
               <div className="order-product-info">
                 <div className="order-description">
-                  <h3>Order ID: {order._id}</h3>
-                  <p>Total Price: ₹ {order.total_price}</p>
+                  <h3>Inquiry ID: {order._id}</h3>
+                  <p>Total Budgeted Price: ₹ {order.total_price}</p>
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <p>No orders available</p>
+          <p>No Inquiry available</p>
         )}
       </div>
     </div>

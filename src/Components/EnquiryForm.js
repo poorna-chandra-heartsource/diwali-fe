@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../Styles/enquiryForm.css";
 import TermConditions from "./TermConditions";
+import { formatPrice } from "../utils";
 
 const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
   const [formData, setFormData] = useState({
@@ -205,12 +206,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
         apiUrl = "http://127.0.0.1:3001/users";
         dataToSend = formDataWithStringPincode;
       }
-      // const config = {
-      //   headers: {
-      //     Authorization:
-      //       userData && userData.token ? `Bearer ${userData.token}` : "",
-      //   },
-      // };
+
       const response = await axios.post(apiUrl, dataToSend, headerConfig);
       if (response.status === 200 || response.status === 201) {
         setFormData({
@@ -493,13 +489,15 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
                 <span>
                   {item.name} × <b>{item.quantity}</b>
                 </span>
-                <span>₹{item.rate_in_rs * item.quantity}</span>
+                <span>
+                  {formatPrice((item.rate_in_rs || 0) * (item.quantity || 0))}
+                </span>
               </div>
             ))
           )}
           <div className="summary-item">
             <strong>Subtotal</strong>
-            <span>₹{getSubtotalPrice()}</span>
+            <span>₹ {formatPrice(getSubtotalPrice())}</span>
           </div>
           <div className="summary-item">
             <strong>Shipping</strong>
@@ -507,7 +505,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
           </div>
           <div className="summary-item total">
             <strong>Total</strong>
-            <span>₹{getSubtotalPrice()}</span>
+            <span>₹ {formatPrice(getSubtotalPrice())}</span>
           </div>
           <div className="termConditions">
             By sending your inquiry, you agree to the &nbsp;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../Styles/orderDetails.css";
+import { formatPrice } from "../utils";
 
 const OrderDetails = () => {
   const [order, setOrder] = useState(null);
@@ -46,21 +47,22 @@ const OrderDetails = () => {
 
   return (
     <div className="order-details-container">
-      <h3>Order Details</h3>
+      <h3>Inquiry Details</h3>
       {error && <p className="error-message">{error}</p>}
       <div className="order-summary">
         <p>
-          <strong>Order ID:</strong> {order._id}
+          <strong>Inquiry ID:</strong> {order._id}
         </p>
         <p>
-          <strong>Total Price:</strong> ₹{order.total_price}
+          <strong>Total Budgeted Price:</strong> ₹{" "}
+          {formatPrice(order.total_price || 0)}
         </p>
         <p>
-          <strong>Order Date:</strong>{" "}
+          <strong>Inquiry Date:</strong>{" "}
           {new Date(order.created_dt).toLocaleDateString()}
         </p>
       </div>
-      <h3>Items in Order</h3>
+      <h3>Items in Inquiry</h3>
       <div className="order-grid">
         {order.orderItems.map((item, index) => (
           <div key={index} className="order-item">
@@ -68,14 +70,14 @@ const OrderDetails = () => {
               <div className="order-description">
                 <h3>{item.productName}</h3>
                 <p>Quantity: {item.quantity}</p>
-                <p>Price: ₹{item.price}</p>
+                <p>Price: ₹ {formatPrice(item.price) || 0}</p>
               </div>
             </div>
           </div>
         ))}
       </div>
       <button className="back-button" onClick={handleBackClick}>
-        Back to Order List
+        Back to Inquiry List
       </button>
     </div>
   );

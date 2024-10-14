@@ -33,7 +33,7 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
           {isLoggedIn && (
             <>
               <li>
-                <a href="/order-list">Orders</a>
+                <a href="/order-list">Inquries</a>
               </li>
             </>
           )}

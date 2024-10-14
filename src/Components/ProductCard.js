@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Spinner from "./Spinner";
 import "../Styles/productCard.css";
+import { formatPrice } from "../utils";
 
 const ProductCard = ({ _id, name, rate_in_rs, image, onAddToCart }) => {
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,7 @@ const ProductCard = ({ _id, name, rate_in_rs, image, onAddToCart }) => {
         <img src={image} alt={name} />
         <div className="product-info">
           <p className="product-name">{name}</p>
-          <p className="new-price">₹{rate_in_rs}</p>
+          <p className="new-price">₹ {formatPrice(rate_in_rs)}</p>
         </div>
 
         <button

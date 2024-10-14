@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Spinner from "./Spinner";
 import "../Styles/productModal.css";
+import { formatPrice } from "../utils";
 
 const ProductModal = ({ product, onClose, onAddToCart }) => {
   const [quantity, setQuantity] = useState(0);
@@ -60,7 +61,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
         <img src={product.image} alt={product.name} className="modal-image" />
         <div className="modal-info">
           <h2>{product.name}</h2>
-          <p className="new-price">₹{product.rate_in_rs}</p>
+          <p className="new-price">₹ {formatPrice(product.rate_in_rs)}</p>
 
           <div className="quantity-control">
             <button className="quantity-btn" onClick={handleDecrement}>

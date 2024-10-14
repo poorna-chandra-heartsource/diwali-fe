@@ -39,7 +39,7 @@ const Shop = ({ onAddToCart }) => {
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false);
       }
     };
 
