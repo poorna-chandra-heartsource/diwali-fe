@@ -45,7 +45,7 @@ const ForgotPassword = () => {
     <div className="forgot-password-card">
       <h3 className="subtitle">Forgot Your Password?</h3>
       <p className="instructions">
-        Please enter the email address associated with your Diwali Celebrations
+        Please enter the email address associated with your Diwali Inquiries
         Account, then check your email for password reset instructions.
       </p>
       <form className="forgot-password-form" onSubmit={handleSubmit}>

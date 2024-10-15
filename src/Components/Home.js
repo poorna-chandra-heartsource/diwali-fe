@@ -2,15 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Carousel from "./Carousel";
 import OurProducts from "./OurProducts";
-
 import "../Styles/home.css";
 
 const images = [
-  "/Images/diwali-image-6.png",
-  "/Images/diwali-image-text2.png",
-  "/Images/diwali-image-text3.png",
+  "/Images/Diwali-img1.png",
   "/Images/diwali-image-text.png",
-  "/Images/diwali-image-1.png",
   "/Images/diwali-image-2.png",
   "/Images/diwali-image-4.png",
 ];

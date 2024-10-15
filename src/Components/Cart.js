@@ -145,10 +145,6 @@ const Cart = ({ cartItems, setCartItems }) => {
             <span>Subtotal</span>
             <span>₹ {formatPrice(getSubtotalPrice())}</span>
           </div>
-          <div className="summary-item">
-            <span>Shipping</span>
-            <span>Delivery Charge Applicable</span>
-          </div>
           <div className="summary-item total">
             <span>Budgeted Price</span>
             <span>₹ {formatPrice(getSubtotalPrice())}</span>

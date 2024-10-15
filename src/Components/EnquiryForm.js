@@ -499,12 +499,8 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             <strong>Subtotal</strong>
             <span>₹ {formatPrice(getSubtotalPrice())}</span>
           </div>
-          <div className="summary-item">
-            <strong>Shipping</strong>
-            <span>Delivery Charge Applicable</span>
-          </div>
           <div className="summary-item total">
-            <strong>Budgeted Total</strong>
+            <strong>Budgeted Total Price</strong>
             <span>₹ {formatPrice(getSubtotalPrice())}</span>
           </div>
           <div className="termConditions">
@@ -540,8 +536,8 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
       {successModalOpen && (
         <div className="success-modal">
           <p>
-            Your Inquiry has sent succsessfully ! <br /> Please check your email
-            for more details.
+            Your Inquiry has been sent successfully ! <br /> Please check your
+            email for more details.
           </p>
           <button onClick={handleSuccessModalClose}>Close</button>
         </div>

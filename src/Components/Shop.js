@@ -31,6 +31,7 @@ const Shop = ({ onAddToCart }) => {
           name: product.name,
           category: product.category,
           unit_price: product.unit_price,
+          unit_of_sale: product.unit_of_sale,
           image: productImages[product.name] || "/Images/placeholder.png",
         }));
 
@@ -168,6 +169,7 @@ const Shop = ({ onAddToCart }) => {
                     _id={product._id}
                     name={product.name}
                     unit_price={product.unit_price}
+                    unit_of_sale={product.unit_of_sale}
                     image={product.image}
                     onAddToCart={onAddToCart}
                   />

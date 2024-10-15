@@ -3,7 +3,14 @@ import Spinner from "./Spinner";
 import "../Styles/productCard.css";
 import { formatPrice } from "../utils";
 
-const ProductCard = ({ _id, name, unit_price, image, onAddToCart }) => {
+const ProductCard = ({
+  _id,
+  name,
+  unit_price,
+  unit_of_sale,
+  image,
+  onAddToCart,
+}) => {
   const [loading, setLoading] = useState(false);
   const [notification, setNotification] = useState("");
 
@@ -14,7 +21,7 @@ const ProductCard = ({ _id, name, unit_price, image, onAddToCart }) => {
 
     setTimeout(() => {
       if (onAddToCart) {
-        onAddToCart({ _id, name, unit_price, image }, 1);
+        onAddToCart({ _id, name, unit_price, unit_of_sale, image }, 1);
         setNotification("Added to Cart");
       }
       setLoading(false);
@@ -33,7 +40,9 @@ const ProductCard = ({ _id, name, unit_price, image, onAddToCart }) => {
         <img src={image} alt={name} />
         <div className="product-info">
           <p className="product-name">{name}</p>
-          <p className="new-price">₹ {formatPrice(unit_price)}</p>
+          <p className="new-price">
+            ₹ {formatPrice(unit_price)}&nbsp;({unit_of_sale})
+          </p>
         </div>
 
         <button
