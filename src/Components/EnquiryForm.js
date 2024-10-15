@@ -29,6 +29,8 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -197,6 +199,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
           Authorization: token ? `Bearer ${token}` : "",
         },
       };
+      setSubmittedEmail(formData.email);
       //if user is loggedIn
       if (token) {
         apiUrl = "http://127.0.0.1:3001/orders";
@@ -537,7 +540,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
         <div className="success-modal">
           <p>
             Your Inquiry has been sent successfully ! <br /> Please check your
-            email for more details.
+            email (<strong>{submittedEmail}</strong>) for more details.
           </p>
           <button onClick={handleSuccessModalClose}>Close</button>
         </div>
