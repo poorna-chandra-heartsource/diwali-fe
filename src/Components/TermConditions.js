@@ -19,40 +19,21 @@ const TermConditions = ({ isOpen, onClose }) => {
         <h2>Terms & Conditions</h2>
         <p>
           These Terms & Conditions govern your use of{" "}
-          <strong>Diwali Celebrations</strong>, referred to as "Website" in
-          these Terms and Conditions. By accessing or using Website, you agree
-          to be bound by these terms.
+          <strong>diwaliinquiries.in</strong>, referred to as Website in these
+          Terms and Conditions. By accessing or using Website, you agree to be
+          bound by these terms.
         </p>
 
         <h3>1. No Sale of Firecrackers</h3>
         <p>
-          Website does not sell firecrackers or any related products directly.
-          Our platform is designed to showcase various firecrackers from{" "}
-          <strong>
-            Gopi Agencies, 2/2052, Sasi Nagar, Sivakasi, Tamil Nadu - 626123
-          </strong>
-          , allowing users to submit Inquiry requests for these products. Once
-          an inquiry is submitted, it is forwarded to Gopi Agencies for further
-          processing.
+          Website intends only to provide an estimated cost of fire crackers. It
+          does not sell firecrackers or any related products. Pricing,
+          categories and items are modeled after Gopi Agencies from Sivakasi.
+          Once an inquiry is submitted, you will get an email detailing your
+          selections and budget.
         </p>
 
-        <h3>2. Inquiry Process</h3>
-        <p>
-          When you submit an Inquiry through our website, the details of your
-          request are sent directly to Gopi Agencies. Gopi Agencies is
-          responsible for:
-        </p>
-        <ul>
-          <li>
-            Processing your inquiry and communicating the feasibility of
-            shipment delivery.
-          </li>
-          <li>Finalizing the sale.</li>
-          <li>Shipping and delivering the firecrackers.</li>
-          <li>Handling payment directly upon delivery.</li>
-        </ul>
-
-        <h3>3. Liability Disclaimer</h3>
+        <h3>2. Liability Disclaimer</h3>
         <p>
           Website acts solely as a platform for submitting inquiry requests and
           has no involvement in the sale, shipment, delivery, or payment for
@@ -61,21 +42,7 @@ const TermConditions = ({ isOpen, onClose }) => {
         <ul>
           <li>
             Website bears no liability for the quality, safety, legality, or any
-            other aspect of the firecrackers provided by Gopi Agencies.
-          </li>
-          <li>
-            Website is not responsible for any issues, including but not limited
-            to, delays, damages, or legal concerns arising from the sale,
-            shipment, or use of the firecrackers.
-          </li>
-          <li>
-            Website is not liable for any damages, losses, or injuries arising
-            from the purchase, use, or possession of firecrackers.
-          </li>
-          <li>Any actions or omissions by Gopi Agencies.</li>
-          <li>
-            Any disputes or claims regarding the firecrackers must be resolved
-            between you and Gopi Agencies.
+            other aspect of the firecrackers inquiries.
           </li>
           <li>
             Website makes no representations or warranties about the accuracy,
@@ -88,32 +55,7 @@ const TermConditions = ({ isOpen, onClose }) => {
           </li>
         </ul>
 
-        <h3>4. Compliance with Laws</h3>
-        <p>
-          Gopi Agencies is solely responsible for ensuring that all products
-          comply with applicable laws, regulations, and safety standards. This
-          includes, but is not limited to:
-        </p>
-        <ul>
-          <li>
-            Selling only approved firecrackers, such as green crackers with
-            reduced emissions, as required by law.
-          </li>
-          <li>
-            Ensuring that firecrackers are not delivered to areas where they are
-            prohibited or restricted by local laws and regulations.
-          </li>
-        </ul>
-
-        <h3>5. Prohibited Regions</h3>
-        <p>
-          It is Gopi Agencies’s responsibility to ensure that firecrackers are
-          not delivered to regions where their sale or use is banned or
-          restricted. Website is not liable for any shipments made to such areas
-          and does not verify the legality of deliveries.
-        </p>
-
-        <h3>6. Changes to the Terms</h3>
+        <h3>3. Changes to the Terms</h3>
         <p>
           Website reserves the right to modify or update these Terms &
           Conditions at any time without prior notice. Continued use of the

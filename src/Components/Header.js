@@ -20,7 +20,7 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
   return (
     <header className="header">
       <div className="logo">
-        <a href="/">Diwali Celebrations</a>
+        <a href="/">Diwali Inquiries</a>
       </div>
       <nav>
         <ul className={`nav-links ${menuOpen ? "show" : ""}`}>
@@ -33,7 +33,7 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
           {isLoggedIn && (
             <>
               <li>
-                <a href="/order-list">Inquries</a>
+                <a href="/order-list">Inquiries</a>
               </li>
             </>
           )}

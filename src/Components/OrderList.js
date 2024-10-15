@@ -29,7 +29,14 @@ const OrderList = () => {
         );
         setOrders(response.data.data);
       } catch (err) {
-        setError("Failed to fetch orders. Please try again.");
+        if (err.response && err.response.status === 401) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("userId");
+          localStorage.removeItem("userName");
+          navigate("/login");
+        } else {
+          setError("Failed to fetch orders. Please try again.");
+        }
       }
     };
 

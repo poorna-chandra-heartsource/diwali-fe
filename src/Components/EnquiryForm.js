@@ -504,7 +504,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             <span>Delivery Charge Applicable</span>
           </div>
           <div className="summary-item total">
-            <strong>Total</strong>
+            <strong>Budgeted Total</strong>
             <span>₹ {formatPrice(getSubtotalPrice())}</span>
           </div>
           <div className="termConditions">
