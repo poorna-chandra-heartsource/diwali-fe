@@ -47,6 +47,12 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
     setQuantity(value);
   };
 
+  const handleInputFocus = () => {
+    if (quantity === 0) {
+      setQuantity("");
+    }
+  };
+
   const handleAddtoCart = () => {
     setLoading(true);
     setNotification("");
@@ -73,6 +79,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
     }, 2000);
   };
 
+  const subtotal = quantity * product.unit_price;
   if (!product) return null;
 
   return (
@@ -111,6 +118,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
                     type="number"
                     className="quantity-input"
                     value={quantity}
+                    onFocus={handleInputFocus}
                     onChange={handleInputChange}
                     min="0"
                     max="100"
@@ -126,6 +134,8 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
                     {loading ? <Spinner /> : "Add to Cart"}
                   </button>
                 </div>
+                {/* Display subtotal */}
+                <p className="subtotal">Subtotal: ₹ {formatPrice(subtotal)}</p>
               </div>
             </div>
 
