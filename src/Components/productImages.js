@@ -239,7 +239,7 @@ const productImages = {
   "KIDS BOX": "/Diwali-product-images/diwali-kidsBox.jpg",
   "MUTHU BOX": "/Diwali-product-images/diwali-muthuBox.jpg",
   "GOLD BOX": "/Diwali-product-images/diwali-goldBox.jpg",
-  "PLATINAM BOX": "/Diwali-product-images/diwali-platimamBox.jpg",
+  "PLATINUM BOX": "/Diwali-product-images/diwali-platimamBox.jpg",
   "DIAMOND BOX": "/Diwali-product-images/diwali-diamondBox.jpg",
   SPARKLERS: "/Diwali-product-images/diwali-12CM-RED-SPARKLERS.jpg",
   "SINGLE CRACKERS":

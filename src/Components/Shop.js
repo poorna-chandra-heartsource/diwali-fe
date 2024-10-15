@@ -30,7 +30,7 @@ const Shop = ({ onAddToCart }) => {
           _id: product._id,
           name: product.name,
           category: product.category,
-          rate_in_rs: product.rate_in_rs,
+          unit_price: product.unit_price,
           image: productImages[product.name] || "/Images/placeholder.png",
         }));
 
@@ -74,11 +74,11 @@ const Shop = ({ onAddToCart }) => {
     let sortedProducts = [];
     if (selectedSortOption === "price: low-to-high") {
       sortedProducts = [...products].sort(
-        (a, b) => a.rate_in_rs - b.rate_in_rs
+        (a, b) => a.unit_price - b.unit_price
       );
     } else if (selectedSortOption === "price: high-to-low") {
       sortedProducts = [...products].sort(
-        (a, b) => b.rate_in_rs - a.rate_in_rs
+        (a, b) => b.unit_price - a.unit_price
       );
     }
     setProducts(sortedProducts);
@@ -167,7 +167,7 @@ const Shop = ({ onAddToCart }) => {
                   <ProductCard
                     _id={product._id}
                     name={product.name}
-                    rate_in_rs={product.rate_in_rs}
+                    unit_price={product.unit_price}
                     image={product.image}
                     onAddToCart={onAddToCart}
                   />

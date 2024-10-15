@@ -76,10 +76,10 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
     const orderItems = cartItems.map((item) => ({
       product_id: item._id,
       quantity: item.quantity,
-      price: item.rate_in_rs,
+      price: item.unit_price,
     }));
     const total_price = cartItems.reduce(
-      (total, item) => total + item.rate_in_rs * item.quantity,
+      (total, item) => total + item.unit_price * item.quantity,
       0
     );
 
@@ -268,7 +268,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
 
   const getSubtotalPrice = () => {
     return cartItems.reduce(
-      (total, item) => total + item.rate_in_rs * item.quantity,
+      (total, item) => total + item.unit_price * item.quantity,
       0
     );
   };
@@ -490,7 +490,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
                   {item.name} × <b>{item.quantity}</b>
                 </span>
                 <span>
-                  {formatPrice((item.rate_in_rs || 0) * (item.quantity || 0))}
+                  {formatPrice((item.unit_price || 0) * (item.quantity || 0))}
                 </span>
               </div>
             ))

@@ -44,7 +44,7 @@ const Cart = ({ cartItems, setCartItems }) => {
 
   const getSubtotalPrice = () => {
     return cartItems.reduce(
-      (total, item) => total + item.rate_in_rs * item.quantity,
+      (total, item) => total + item.unit_price * item.quantity,
       0
     );
   };
@@ -93,7 +93,7 @@ const Cart = ({ cartItems, setCartItems }) => {
                 <div className="cart-item-info">
                   <p className="cart-item-name">{item.name}</p>
                   <p className="cart-item-price">
-                    Price:&nbsp;₹ {formatPrice(item.rate_in_rs)}
+                    Price:&nbsp;₹ {formatPrice(item.unit_price)}
                   </p>
                   <div className="cart-item-price-quantity">
                     <div className="quantity-controls">
@@ -123,7 +123,7 @@ const Cart = ({ cartItems, setCartItems }) => {
                   </div>
                   <p className="cart-item-subtotal">
                     Subtotal: ₹{" "}
-                    {formatPrice((item.rate_in_rs || 0) * (item.quantity || 0))}
+                    {formatPrice((item.unit_price || 0) * (item.quantity || 0))}
                   </p>
                 </div>
                 <button

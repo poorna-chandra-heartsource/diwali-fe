@@ -56,7 +56,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
           {
             _id: product._id,
             name: product.name,
-            rate_in_rs: product.rate_in_rs,
+            unit_price: product.unit_price,
             image: product.image,
           },
           quantity
@@ -98,7 +98,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
               />
               <div className="modal-info">
                 <h2>{product.name}</h2>
-                <p className="new-price">₹ {formatPrice(product.rate_in_rs)}</p>
+                <p className="new-price">₹ {formatPrice(product.unit_price)}</p>
                 <div className="quantity-control">
                   <button className="quantity-btn" onClick={handleDecrement}>
                     -
