@@ -12,7 +12,7 @@ const EmptyCart = () => {
   return (
     <div className="empty-cart-container" onClick={handleClick}>
       <div className="cart-image">
-        <img src="/Images/emptyCart.png" alt="Diwlai-Empty-Cart" />
+        <img src="/Images/cart2.png" alt="Diwlai-Empty-Cart" />
       </div>
       <h2>Hey, your cart feels empty!</h2>
       <p>Let's fill it with something special.</p>
