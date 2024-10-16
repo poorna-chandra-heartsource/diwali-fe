@@ -141,12 +141,9 @@ const Cart = ({ cartItems, setCartItems }) => {
       <div className="cart-summary-section">
         <div className="cart-summary">
           <h3>Cart Totals</h3>
-          <div className="summary-item">
-            <span>Subtotal</span>
-            <span>₹ {formatPrice(getSubtotalPrice())}</span>
-          </div>
+
           <div className="summary-item total">
-            <span>Budgeted Price</span>
+            <span>Budgeted Total Price</span>
             <span>₹ {formatPrice(getSubtotalPrice())}</span>
           </div>
           <button className="proceed-btn" onClick={handleConfirmEnquiry}>
