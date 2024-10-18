@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../Styles/sideBar.css";
+import config from "../config";
 
 const Sidebar = ({ onCategorySelect, selectedCategory }) => {
   const [categories, setCategories] = useState([]);
@@ -9,7 +10,7 @@ const Sidebar = ({ onCategorySelect, selectedCategory }) => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:3001/products/categories"
+         `${config.backendURL}/products/categories`
         );
         const fetchedCategories = response.data.map((category) => ({
           name: category.product_category,

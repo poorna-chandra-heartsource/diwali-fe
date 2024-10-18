@@ -3,6 +3,7 @@ import axios from "axios";
 import Spinner from "./Spinner";
 import "../Styles/productModal.css";
 import { formatPrice } from "../utils";
+import config from "../config";
 
 const ProductModal = ({ product, onClose, onAddToCart }) => {
   const [quantity, setQuantity] = useState(0);
@@ -14,7 +15,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
   useEffect(() => {
     if (product?.name) {
       setItemsLoading(true);
-      const apiUrl = `http://127.0.0.1:3001/giftbox?name=${encodeURIComponent(
+      const apiUrl = `${config.backendURL}/giftbox?name=${encodeURIComponent(
         product.name
       )}`;
       axios

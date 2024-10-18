@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../Styles/resetPassword.css";
+import config from "../config";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -33,7 +34,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3001/auth/reset-password",
+        `${config.backendURL}/auth/reset-password`,
         {
           token: token,
           password: password,

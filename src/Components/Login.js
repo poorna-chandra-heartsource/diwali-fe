@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/login.css";
+import config from "../config";
 
 const Login = ({ setIsLoggedIn }) => {
   const [formData, setFormData] = useState({
@@ -52,7 +53,7 @@ const Login = ({ setIsLoggedIn }) => {
     }
 
     try {
-      const response = await axios.post("http://127.0.0.1:3001/auth/login", {
+      const response = await axios.post(`${config.backendURL}/auth/login`, {
         email: formData.email,
         password: formData.password,
       });

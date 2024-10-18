@@ -6,6 +6,7 @@ import ProductModal from "./ProductModal";
 import SideBar from "./SideBar";
 import "../Styles/shop.css";
 import productImages from "./productImages";
+import config from "../config";
 
 const Shop = ({ onAddToCart }) => {
   const [allProducts, setAllProducts] = useState([]);
@@ -24,7 +25,7 @@ const Shop = ({ onAddToCart }) => {
     const fetchProducts = async () => {
       try {
         const response = await axios.post(
-          `http://127.0.0.1:3001/products/fetch?sort_field=name&sort_order=asc&page=1&limit=200`
+         `${config.backendURL}/products/fetch?sort_field=name&sort_order=asc&page=1&limit=200`
         );
         const fetchedProducts = response.data.data.map((product) => ({
           _id: product._id,

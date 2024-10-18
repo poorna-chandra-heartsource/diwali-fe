@@ -23,7 +23,7 @@ const OrderList = () => {
           },
         };
         const response = await axios.post(
-          "http://127.0.0.1:3001/orders/fetch?sort_field=serial_number&sort_order=asc&page=1&limit=70",
+          `${config.backendURL}/orders/fetch?sort_field=serial_number&sort_order=asc&page=1&limit=70`,
           {},
           config
         );

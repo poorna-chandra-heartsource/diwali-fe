@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  react-app:
+    build:
+      context: .
+      args:
+        ENV_FILE: .env.development
+    image: diwali.azurecr.io/diwali-fe:1.0.2
+    ports:
+      - "80:80"

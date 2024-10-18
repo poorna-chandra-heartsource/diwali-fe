@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import productImages from "./productImages";
 import "../Styles/ourProducts.css";
+import config from "../config";
 
 const OurProducts = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ const OurProducts = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:3001/products/categories"
+          `${config.backendURL}/products/categories`
         );
         const fetchedProducts = response.data.map((product, index) => ({
           id: index + 1,

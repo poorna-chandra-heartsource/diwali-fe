@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EnquiryForm from "./EnquiryForm";
+import config from "../config";
 
 const UserEnquiry = ({ cartItems, setCartItems }) => {
   const [userData, setUserData] = useState(null);
@@ -18,7 +19,7 @@ const UserEnquiry = ({ cartItems, setCartItems }) => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:3001/users/${userId}`
+          `${config.backendURL}/users/${userId}`
         );
         setUserData(response.data);
       } catch (error) {

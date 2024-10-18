@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/forgotPassword.css";
+import config from "../config";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3001/auth/forgot-password",
+        `${config.backendURL}/auth/forgot-password`,
         {
           email: email,
         }

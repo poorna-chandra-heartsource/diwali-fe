@@ -23,7 +23,7 @@ const OrderDetails = () => {
           },
         };
         const response = await axios.get(
-          `http://127.0.0.1:3001/orders/${orderId}`,
+         `${config.backendURL}/orders/${orderId}`,
           config
         );
         setOrder(response.data);

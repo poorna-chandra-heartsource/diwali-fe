@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../Styles/enquiryForm.css";
 import TermConditions from "./TermConditions";
 import { formatPrice } from "../utils";
+import config from "../config";
 
 const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
   const [formData, setFormData] = useState({
@@ -202,11 +203,11 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
       setSubmittedEmail(formData.email);
       //if user is loggedIn
       if (token) {
-        apiUrl = "http://127.0.0.1:3001/orders";
+        apiUrl = `${config.backendURL}/orders`;
         dataToSend = formDataWithStringPincode.order;
       } else {
         // If user is not logged in
-        apiUrl = "http://127.0.0.1:3001/users";
+        apiUrl = `${config.backendURL}/users`;
         dataToSend = formDataWithStringPincode;
       }
 
