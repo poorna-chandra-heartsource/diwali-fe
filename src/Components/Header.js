@@ -20,6 +20,13 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
   return (
     <header className="header">
       <div className="logo">
+        {/* <img
+          src="/Images/Diwali-logo-new.png"
+          alt="logo"
+          height="100px"
+          width="100px"
+          style={{ borderRadius: "50%" }}
+        /> */}
         <a href="/">Diwali Inquiries</a>
       </div>
       <nav>
