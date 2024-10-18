@@ -32,12 +32,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: diwali-fe-service
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: "product_service_rg"
 spec:
   type: LoadBalancer
+  loadBalancerIP: 40.121.150.44 # Replace with your static IP
   selector:
     app: diwali-fe
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
-
