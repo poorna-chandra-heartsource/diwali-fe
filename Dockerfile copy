@@ -21,20 +21,14 @@ COPY ./env/${ENV_FILE} .env
 # Build the React app for production
 RUN npm run build
 
-# Use a lightweight HTTP server to serve the static files
-FROM node:18-alpine
+# Use Nginx as the production server
+FROM nginx:alpine
 
-# Set the working directory for the server
-WORKDIR /usr/src/app
+# Copy the built React app to Nginx's web server directory
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Copy the build artifacts from the previous stage
-COPY --from=build /app/build ./build
-
-# Install serve to serve the static files
-RUN npm install -g serve
-
-# Expose port 3000 (or any port you prefer)
+# Expose port 80 for the Nginx server
 EXPOSE 80
 
-# Start the application using serve
-CMD ["serve", "-s", "build", "-l", "80"]
+# Start Nginx when the container runs
+CMD ["nginx", "-g", "daemon off;"]
