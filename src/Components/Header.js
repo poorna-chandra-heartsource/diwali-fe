@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styles/header.css";
+import { Link } from 'react-router-dom';
 
 const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -32,25 +33,25 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
       <nav>
         <ul className={`nav-links ${menuOpen ? "show" : ""}`}>
           <li>
-            <a href="/">Home</a>
+          <Link to="/">Home</Link>
           </li>
           <li>
-            <a href="/products">Products</a>
+            <Link to="/products">Products</Link>
           </li>
           {isLoggedIn && (
             <>
               <li>
-                <a href="/order-list">Inquiries</a>
+              <Link to="/order-list">Inquiries</Link>
               </li>
             </>
           )}
           {isLoggedIn ? (
             <li onClick={handleLogout}>
-              <a href="#/">Logout</a>
+             <Link to="#">Logout</Link>
             </li>
           ) : (
             <li>
-              <a href="/login">Login</a>
+              <Link to="/login">Login</Link>
             </li>
           )}
         </ul>
