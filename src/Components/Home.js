@@ -5,7 +5,7 @@ import OurProducts from "./OurProducts";
 import "../Styles/home.css";
 
 const images = [
-  "/Images/Diwali-img1.png",
+  "/Images/Diwali-Img1.png",
   "/Images/diwali-image-text.png",
   "/Images/diwali-image-2.png",
   "/Images/diwali-image-4.png",

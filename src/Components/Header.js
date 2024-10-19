@@ -9,40 +9,45 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
   const toggleMenu = () => {
     setMenuOpen((prev) => !prev);
   };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
     localStorage.removeItem("userName");
     setIsLoggedIn(false);
     navigate("/login");
+    closeMenu();
   };
 
   return (
     <header className="header">
       <div className="logo">
-        {/* <img
-          src="/Images/Diwali-logo-new.png"
-          alt="logo"
-          height="100px"
-          width="100px"
-          style={{ borderRadius: "50%" }}
-        /> */}
-        <a href="/">Diwali Inquiries</a>
+        <a href="/" onClick={closeMenu}>
+          Diwali Inquiries
+        </a>
       </div>
       <nav>
         <ul className={`nav-links ${menuOpen ? "show" : ""}`}>
           <li>
-            <a href="/">Home</a>
+            <a href="/" onClick={closeMenu}>
+              Home
+            </a>
           </li>
           <li>
-            <a href="/products">Products</a>
+            <a href="/products" onClick={closeMenu}>
+              Products
+            </a>
           </li>
           {isLoggedIn && (
-            <>
-              <li>
-                <a href="/order-list">Inquiries</a>
-              </li>
-            </>
+            <li>
+              <a href="/order-list" onClick={closeMenu}>
+                Inquiries
+              </a>
+            </li>
           )}
           {isLoggedIn ? (
             <li onClick={handleLogout}>
@@ -50,7 +55,9 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
             </li>
           ) : (
             <li>
-              <a href="/login">Login</a>
+              <a href="/login" onClick={closeMenu}>
+                Login
+              </a>
             </li>
           )}
         </ul>
@@ -63,7 +70,10 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
       <div className="cart">
         <div
           className="header-cart-container"
-          onClick={() => navigate("/cart")}
+          onClick={() => {
+            navigate("/cart");
+            closeMenu();
+          }}
         >
           <i
             className="fa-solid fa-cart-shopping fa-flip-horizontal"
