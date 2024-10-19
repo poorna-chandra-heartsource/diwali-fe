@@ -6,6 +6,6 @@ services:
       context: .
       args:
         ENV_FILE: .env.development
-    image: diwali.azurecr.io/diwali-fe:1.0.7
+    image: diwali.azurecr.io/diwali-fe:1.0.8
     ports:
       - "80:80"
