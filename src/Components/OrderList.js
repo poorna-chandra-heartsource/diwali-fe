@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../Styles/orderList.css";
+import config from "../config";
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -17,7 +18,7 @@ const OrderList = () => {
     const fetchOrders = async () => {
       try {
         let token = localStorage.getItem("token");
-        const config = {
+        const headerConfig = {
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
           },
@@ -25,7 +26,7 @@ const OrderList = () => {
         const response = await axios.post(
           `${config.backendURL}/orders/fetch?sort_field=serial_number&sort_order=asc&page=1&limit=70`,
           {},
-          config
+          headerConfig
         );
         setOrders(response.data.data);
       } catch (err) {

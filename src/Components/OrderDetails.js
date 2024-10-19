@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../Styles/orderDetails.css";
 import { formatPrice } from "../utils";
+import config from "../config";
 
 const OrderDetails = () => {
   const [order, setOrder] = useState(null);
@@ -17,14 +18,14 @@ const OrderDetails = () => {
     const fetchOrderDetails = async () => {
       try {
         let token = localStorage.getItem("token");
-        const config = {
+        const headerConfig = {
           headers: {
             Authorization: token ? `Bearer ${token}` : "",
           },
         };
         const response = await axios.get(
          `${config.backendURL}/orders/${orderId}`,
-          config
+         headerConfig
         );
         setOrder(response.data);
       } catch (err) {
