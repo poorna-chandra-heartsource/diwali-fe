@@ -18,14 +18,26 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
       const apiUrl = `${config.backendURL}/giftbox?name=${encodeURIComponent(
         product.name
       )}`;
+
       axios
         .get(apiUrl)
         .then((response) => {
-          setGiftBoxItems(response.data.items || []);
-          setItemsLoading(false);
+          const items = response.data.items || [];
+          if (items.length > 0) {
+            setGiftBoxItems(items);
+          } else {
+            setGiftBoxItems([]);
+          }
         })
         .catch((error) => {
-          console.error("Error fetching gift box items:", error);
+          if (error.response && error.response.status === 404) {
+            console.warn(`No gift box items found for ${product.name}`);
+            setGiftBoxItems([]);
+          } else {
+            console.error("Error fetching gift box items:", error);
+          }
+        })
+        .finally(() => {
           setItemsLoading(false);
         });
     }
@@ -130,7 +142,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
                   <button
                     className="enquiry-btn"
                     onClick={handleAddtoCart}
-                    disabled={loading}
+                    disabled={loading || quantity === 0}
                   >
                     {loading ? <Spinner /> : "Add to Cart"}
                   </button>

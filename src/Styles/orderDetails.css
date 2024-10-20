@@ -143,4 +143,7 @@
   .order-description p {
     font-size: 12px;
   }
+  .back-button {
+    margin-left: 10%;
+  }
 }

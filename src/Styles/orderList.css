@@ -91,27 +91,27 @@
   }
 }
 
-/* Mobile Version (max-width: 480px) */
+/* Mobile (max-width: 480px) */
 @media (max-width: 480px) {
   .order-grid {
-    grid-template-columns: 1fr; /* Single column for mobile screens */
+    grid-template-columns: 1fr;
   }
 
   .order-details-container {
-    margin-top: 12%;
+    margin-top: 20%;
     padding: 10px;
   }
 
   .order-item {
-    flex-direction: column; /* Stack the image and description vertically */
+    flex-direction: column;
     text-align: center;
     padding: 10px;
   }
 
   .order-image {
-    width: 70px; /* Further reduce image size for small screens */
+    width: 70px;
     height: 70px;
-    margin: 0 auto 10px; /* Center image for small screens */
+    margin: 0 auto 10px;
   }
 
   .order-description h3 {

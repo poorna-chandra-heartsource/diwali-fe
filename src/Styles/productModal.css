@@ -188,6 +188,7 @@
     max-width: 350px;
     padding: 15px;
     max-height: 85vh;
+    margin-top: 10%;
     overflow-y: auto;
   }
 

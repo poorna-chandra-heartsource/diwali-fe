@@ -53,6 +53,8 @@ nav a:hover {
 .nav-links.show {
   display: flex;
   flex-direction: column;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 .header .cart {
@@ -108,6 +110,7 @@ nav a:hover {
 
   .nav-links.show {
     display: flex;
+    margin-top: -5px;
   }
 
   .hamburger {
