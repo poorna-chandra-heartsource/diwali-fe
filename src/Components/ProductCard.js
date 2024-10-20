@@ -29,7 +29,7 @@ const ProductCard = ({
       setTimeout(() => {
         setNotification("");
       }, 3000);
-    }, 2000);
+    }, 500);
   };
 
   return (
