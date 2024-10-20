@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import ProductCard from "./ProductCard";
@@ -13,12 +13,14 @@ const Shop = ({ onAddToCart }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
   const [sortOption, setSortOption] = useState(null);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
 
   const location = useLocation();
   const [selectedCategory, setSelectedCategory] = useState(
     location.state?.selectedCategory || null
   );
+
+  const productRef = useRef(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,7 +34,7 @@ const Shop = ({ onAddToCart }) => {
           category: product.category,
           unit_price: product.unit_price,
           unit_of_sale: product.unit_of_sale,
-          image: productImages[product.name] || "/Images/placeholder.png",
+          image: productImages[product.name] || "/Images/logo.png",
         }));
 
         setAllProducts(fetchedProducts);
@@ -59,6 +61,10 @@ const Shop = ({ onAddToCart }) => {
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
+
+    if (window.innerWidth <= 480 && productRef.current) {
+      productRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const handleProductClick = (product) => {
@@ -97,7 +103,7 @@ const Shop = ({ onAddToCart }) => {
       <div className="shop-content">
         {loading ? (
           <div className="shop-spinner-container">
-            <div className="shop-spinner"></div>{" "}
+            <div className="shop-spinner"></div>
           </div>
         ) : (
           <>
@@ -133,11 +139,7 @@ const Shop = ({ onAddToCart }) => {
                   </button>
 
                   {isSortDropdownOpen && (
-                    <div
-                      className={`sort-dropdown-content ${
-                        isSortDropdownOpen ? "show" : ""
-                      }`}
-                    >
+                    <div className="sort-dropdown-content">
                       <div
                         className="sort-item"
                         onClick={() => handleSort("price: low-to-high")}
@@ -159,7 +161,7 @@ const Shop = ({ onAddToCart }) => {
               <sup>*</sup>Images are for display purposes only. The actual
               product may differ from the image shown.
             </p>
-            <div className="product-grid">
+            <div ref={productRef} className="product-grid">
               {products.map((product) => (
                 <div
                   key={product._id}
