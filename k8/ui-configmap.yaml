@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: ui-configmap-dev
 data:
-  BACKEND_URL: "https://diwaliinquiries.in"
+  BACKEND_URL: "https://diwaliinquiries.in/api/"
