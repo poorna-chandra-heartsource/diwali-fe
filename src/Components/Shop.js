@@ -40,7 +40,6 @@ const Shop = ({ onAddToCart }) => {
         setAllProducts(fetchedProducts);
         setProducts(fetchedProducts);
 
-        // Scroll to products on initial load if on mobile
         if (
           window.innerWidth <= 480 &&
           productRef.current &&
@@ -51,7 +50,7 @@ const Shop = ({ onAddToCart }) => {
               behavior: "smooth",
               block: "start",
             });
-          }, 100); // Add a slight delay to ensure rendering
+          }, 100);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -78,7 +77,7 @@ const Shop = ({ onAddToCart }) => {
 
     setProducts(filteredProducts);
 
-    // Scroll to products when a category is selected on mobile
+    // Scroll to products when a category is selected
     if (window.innerWidth <= 480 && productRef.current) {
       setTimeout(() => {
         productRef.current.scrollIntoView({
