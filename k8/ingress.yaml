@@ -16,7 +16,7 @@ spec:
     http:
       paths:
       - path: /.well-known/acme-challenge/
-        pathType: Prefix
+        pathType: ImplementationSpecific
         backend:
           service:
             name: diwali-fe-service
