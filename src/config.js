@@ -1,5 +1,5 @@
 const config = {
-    backendURL: process.env.BACKEND_URL || 'http://52.190.10.71:3000'
+    backendURL: process.env.BACKEND_URL || 'https://diwaliinquiries.in'
   };
   
 export default config;

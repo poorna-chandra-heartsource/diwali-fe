@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: ui-configmap-dev
 data:
-  BACKEND_URL: "http://52.190.10.71:3000"
+  BACKEND_URL: "https://diwaliinquiries.in"
