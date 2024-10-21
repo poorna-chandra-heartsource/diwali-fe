@@ -15,14 +15,14 @@ spec:
   - host: diwaliinquiries.in
     http:
       paths:
-      - path: /api/
+      - path: /api(/|$)(.*)  # Match all routes under /api
         pathType: Prefix
         backend:
           service:
             name: diwali-be-service
             port:
               number: 3000
-      - path: /
+      - path: /  # All other routes to frontend
         pathType: Prefix
         backend:
           service:
