@@ -515,7 +515,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             >
               Terms & Conditions
             </a>
-            &nbsp; of Diwali-Celebrations Website
+            &nbsp; of Diwali-Inquiries Website
             <sup>*</sup>
           </div>
         </div>

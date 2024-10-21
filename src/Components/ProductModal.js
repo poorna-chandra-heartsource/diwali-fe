@@ -89,7 +89,7 @@ const ProductModal = ({ product, onClose, onAddToCart }) => {
       setTimeout(() => {
         setNotification("");
       }, 3000);
-    }, 2000);
+    }, 500);
   };
 
   const subtotal = quantity * product.unit_price;
