@@ -40,6 +40,19 @@ const Shop = ({ onAddToCart }) => {
 
         setAllProducts(fetchedProducts);
         setProducts(fetchedProducts);
+
+        if (
+          window.innerWidth <= 480 &&
+          productRef.current &&
+          !selectedCategory
+        ) {
+          setTimeout(() => {
+            productRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }, 100);
+        }
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -51,21 +64,45 @@ const Shop = ({ onAddToCart }) => {
   }, []);
 
   useEffect(() => {
+    let filteredProducts = allProducts;
+
     if (selectedCategory) {
-      setProducts(
-        allProducts.filter((product) => product.category === selectedCategory)
+      filteredProducts = allProducts.filter(
+        (product) => product.category === selectedCategory
       );
-    } else {
-      setProducts(allProducts);
     }
-  }, [selectedCategory, allProducts]);
+
+    if (sortOption) {
+      filteredProducts = sortProducts(filteredProducts, sortOption);
+    }
+
+    setProducts(filteredProducts);
+
+    // Scroll to products when a category is selected
+    if (window.innerWidth <= 480 && productRef.current) {
+      setTimeout(() => {
+        productRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
+  }, [selectedCategory, sortOption, allProducts]);
+
+  const sortProducts = (products, option) => {
+    let sortedProducts = [...products];
+
+    if (option === "price: low-to-high") {
+      sortedProducts.sort((a, b) => a.unit_price - b.unit_price);
+    } else if (option === "price: high-to-low") {
+      sortedProducts.sort((a, b) => b.unit_price - a.unit_price);
+    }
+
+    return sortedProducts;
+  };
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-
-    if (window.innerWidth <= 480 && productRef.current) {
-      productRef.current.scrollIntoView({ behavior: "smooth" });
-    }
   };
 
   const handleProductClick = (product) => {
@@ -79,16 +116,7 @@ const Shop = ({ onAddToCart }) => {
   const handleSort = (selectedSortOption) => {
     setSortOption(selectedSortOption);
     setIsSortDropdownOpen(false);
-    let sortedProducts = [];
-    if (selectedSortOption === "price: low-to-high") {
-      sortedProducts = [...products].sort(
-        (a, b) => a.unit_price - b.unit_price
-      );
-    } else if (selectedSortOption === "price: high-to-low") {
-      sortedProducts = [...products].sort(
-        (a, b) => b.unit_price - a.unit_price
-      );
-    }
+    let sortedProducts = sortProducts(products, selectedSortOption);
     setProducts(sortedProducts);
   };
 
@@ -140,7 +168,7 @@ const Shop = ({ onAddToCart }) => {
                   </button>
 
                   {isSortDropdownOpen && (
-                    <div className="sort-dropdown-content">
+                    <div className="sort-dropdown-content show">
                       <div
                         className="sort-item"
                         onClick={() => handleSort("price: low-to-high")}

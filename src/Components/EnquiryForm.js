@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../Styles/enquiryForm.css";
@@ -33,6 +33,16 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
   const [submittedEmail, setSubmittedEmail] = useState("");
 
   const navigate = useNavigate();
+  const errorRef = useRef(null);
+
+  // Create refs for each field
+  const full_nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const mobileRef = useRef(null);
+  const addressLine1Ref = useRef(null);
+  const cityRef = useRef(null);
+  const pincodeRef = useRef(null);
+  const stateRef = useRef(null);
 
   useEffect(() => {
     if (userData) {
@@ -158,7 +168,63 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
     }
 
     setErrors(newErrors);
+
+    // Scroll to the first field with an error
+    const firstErrorField = Object.keys(newErrors)[0];
+    if (window.innerWidth <= 480) {
+      scrollToField(firstErrorField);
+    }
+
     return Object.keys(newErrors).length === 0;
+  };
+
+  const scrollToField = (fieldName) => {
+    switch (fieldName) {
+      case "full_name":
+        full_nameRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        break;
+      case "email":
+        emailRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        break;
+      case "mobile":
+        mobileRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        break;
+      case "addressLine1":
+        addressLine1Ref.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        break;
+      case "city":
+        cityRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        break;
+      case "pincode":
+        pincodeRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        break;
+      case "state":
+        stateRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        break;
+      default:
+        break;
+    }
   };
 
   const handleSubmit = async () => {
@@ -294,12 +360,13 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             <div className="form-group">
               <label>Name *</label>
               <input
+                ref={full_nameRef}
                 type="text"
                 name="full_name"
                 value={formData.full_name}
                 onChange={handleInputChange}
                 disabled={!!userData}
-                className={errors.email ? "error-input" : ""}
+                className={errors.full_name ? "error-input" : ""}
                 style={{
                   border: errors.full_name
                     ? "2px solid red"
@@ -316,6 +383,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             <div className="form-group">
               <label>Email *</label>
               <input
+                ref={emailRef}
                 type="email"
                 name="email"
                 value={formData.email}
@@ -337,6 +405,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             <div className="form-group">
               <label>Contact No. *</label>
               <input
+                ref={mobileRef}
                 type="number"
                 name="mobile"
                 value={formData.mobile}
@@ -363,6 +432,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
           <div className="form-group">
             <label>Street address *</label>
             <input
+              ref={addressLine1Ref}
               type="text"
               name="addressLine1"
               placeholder="House number and street name"
@@ -395,6 +465,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             <div className="form-group">
               <label>Town / City *</label>
               <input
+                ref={cityRef}
                 type="text"
                 name="city"
                 value={formData.address.city}
@@ -426,6 +497,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             <div className="form-group">
               <label>Pincode *</label>
               <input
+                ref={pincodeRef}
                 type="number"
                 name="pincode"
                 value={formData.address.pincode}
@@ -447,6 +519,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             <div className="form-group">
               <label>State *</label>
               <input
+                ref={stateRef}
                 type="text"
                 name="state"
                 value={formData.address.state}
@@ -521,6 +594,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
         </div>
         <br />
         <button
+          ref={errorRef}
           className="submitBtn"
           onClick={handleSubmit}
           disabled={isSubmitting}
