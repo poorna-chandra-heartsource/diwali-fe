@@ -60,6 +60,17 @@ const Header = ({ cartCount, isLoggedIn, setIsLoggedIn }) => {
               </a>
             </li>
           )}
+          {/* Call Us Section */}
+          <li className="call-us">
+            <i
+              className="fa-solid fa-phone fa-lg"
+              style={{ color: "#ff4d4d" }}
+            ></i>{" "}
+            &nbsp;
+            <a href="tel:9790333674" className="phone-number">
+              +91 63832 75531
+            </a>
+          </li>
         </ul>
         <div className="hamburger" onClick={toggleMenu}>
           <span></span>

@@ -362,6 +362,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
                 ref={full_nameRef}
                 type="text"
                 name="full_name"
+                autoFocus="true"
                 value={formData.full_name}
                 onChange={handleInputChange}
                 disabled={!!userData}
