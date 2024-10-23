@@ -255,7 +255,7 @@ const productImages = {
   "FANCY NOVELTIES": "/Diwali-product-images/diwali-12-SHOT-BOMB.jpg",
   "SKY HIGHS": "/Diwali-product-images/diwali-SKY-GLITERS.jpg",
   "SKY HIGHS (2 Pcs)": "/Diwali-product-images/diwali-skyHigh.jpg",
-  'SKY HIGHS (31⁄2"" - Single Pce)':
+  'SKY HIGHS (31⁄2" - Single Pce)':
     "/Diwali-product-images/diwali-skyHigh.jpg",
   "WALA ITEMS": "/Diwali-product-images/diwali-walaItems.jpg",
   "GIFT BOX": "/Diwali-product-images/diwali-giftBox.jpg",
