@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/login.css";
@@ -11,6 +11,8 @@ const Login = ({ setIsLoggedIn }) => {
   });
   const [errors, setErrors] = useState({});
   const [notification, setNotification] = useState({ message: "", type: "" });
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
@@ -33,8 +35,13 @@ const Login = ({ setIsLoggedIn }) => {
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required *";
+      emailRef.current.focus();
     } else if (!emailRegex.test(formData.email)) {
       newErrors.email = "*Please fill valid email Id";
+      emailRef.current.focus();
+    } else if (!formData.password.trim()) {
+      newErrors.password = "Password is required *";
+      passwordRef.current.focus();
     }
 
     if (!formData.password.trim()) {
@@ -104,6 +111,7 @@ const Login = ({ setIsLoggedIn }) => {
             type="text"
             id="email"
             name="email"
+            ref={emailRef}
             placeholder="Email Id"
             value={formData.email}
             onChange={handleInputChange}
@@ -122,6 +130,7 @@ const Login = ({ setIsLoggedIn }) => {
             type="password"
             id="password"
             name="password"
+            ref={passwordRef}
             placeholder="Password"
             value={formData.password}
             onChange={handleInputChange}

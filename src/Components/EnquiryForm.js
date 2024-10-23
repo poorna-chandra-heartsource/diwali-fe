@@ -35,7 +35,6 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
   const navigate = useNavigate();
   const errorRef = useRef(null);
 
-  // Create refs for each field
   const full_nameRef = useRef(null);
   const emailRef = useRef(null);
   const mobileRef = useRef(null);
@@ -169,9 +168,8 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
 
     setErrors(newErrors);
 
-    // Scroll to the first field with an error
     const firstErrorField = Object.keys(newErrors)[0];
-    if (window.innerWidth <= 480) {
+    if (firstErrorField) {
       scrollToField(firstErrorField);
     }
 
@@ -179,52 +177,40 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
   };
 
   const scrollToField = (fieldName) => {
+    let fieldRef;
     switch (fieldName) {
       case "full_name":
-        full_nameRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        fieldRef = full_nameRef;
         break;
       case "email":
-        emailRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        fieldRef = emailRef;
         break;
       case "mobile":
-        mobileRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        fieldRef = mobileRef;
         break;
       case "addressLine1":
-        addressLine1Ref.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        fieldRef = addressLine1Ref;
         break;
       case "city":
-        cityRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        fieldRef = cityRef;
         break;
       case "pincode":
-        pincodeRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        fieldRef = pincodeRef;
         break;
       case "state":
-        stateRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+        fieldRef = stateRef;
         break;
       default:
-        break;
+        return;
     }
+
+    fieldRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+
+    // Add focus to the field
+    fieldRef.current?.focus();
   };
 
   const handleSubmit = async () => {
