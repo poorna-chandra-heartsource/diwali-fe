@@ -135,6 +135,11 @@ const Shop = ({ onAddToCart }) => {
           </div>
         ) : (
           <>
+            <span className="discount_display">
+              <b>DISCOUNTS!</b> Inquiry value Rs.5,000-10,000 - <b>5% off</b>,
+              Rs.10,001-20,000 - <b>10% off</b>, Above Rs.20,000 -{" "}
+              <b>15% off</b>
+            </span>
             <div className="shop-header">
               <h2>Products</h2>
 

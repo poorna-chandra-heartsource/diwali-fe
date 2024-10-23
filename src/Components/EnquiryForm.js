@@ -89,10 +89,8 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
       quantity: item.quantity,
       price: item.unit_price,
     }));
-    const total_price = cartItems.reduce(
-      (total, item) => total + item.unit_price * item.quantity,
-      0
-    );
+
+    const total_price = calculateTotal();
 
     setFormData((prevData) => ({
       ...prevData,
@@ -103,6 +101,36 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
       },
     }));
   }, [cartItems]);
+
+  const calculateSubtotal = () => {
+    return cartItems.reduce(
+      (total, item) => total + item.unit_price * item.quantity,
+      0
+    );
+  };
+
+  const calculateDiscount = (subtotal) => {
+    if (subtotal >= 20000) return { rate: 0.15, percentage: 15 };
+    if (subtotal >= 10001) return { rate: 0.1, percentage: 10 };
+    if (subtotal >= 5000) return { rate: 0.05, percentage: 5 };
+    return { rate: 0, percentage: 0 };
+  };
+
+  const getDiscountAmount = () => {
+    const subtotal = calculateSubtotal();
+    const { rate } = calculateDiscount(subtotal);
+    return subtotal * rate;
+  };
+
+  const getDiscountPercentage = () => {
+    const subtotal = calculateSubtotal();
+    const { percentage } = calculateDiscount(subtotal);
+    return percentage;
+  };
+
+  const calculateTotal = () => {
+    return calculateSubtotal() - getDiscountAmount();
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -559,9 +587,20 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
             ))
           )}
 
+          <div className="summary-item">
+            <strong>Budgeted Price</strong>
+            <span>₹ {formatPrice(calculateSubtotal())}</span>
+          </div>
+          <div className="summary-item">
+            <strong>
+              Discount (<b>{getDiscountPercentage()}%</b>)
+            </strong>
+            <span>- ₹ {formatPrice(getDiscountAmount())}</span>
+          </div>
+
           <div className="summary-item total">
             <strong>Budgeted Total Price</strong>
-            <span>₹ {formatPrice(getSubtotalPrice())}</span>
+            <span>₹ {formatPrice(calculateTotal())}</span>
           </div>
           <div className="termConditions">
             By sending your inquiry, you agree to the &nbsp;

@@ -172,6 +172,11 @@
   }
 }
 
+.discount_display {
+  color: #ff4d4d;
+  margin-left: 10%;
+}
+
 /* Mobile Version */
 @media (max-width: 768px) {
   .shop-page-container {
@@ -216,6 +221,10 @@
     font-size: 14px;
     padding: 10px 15px;
   }
+  .discount_display {
+    color: #ff4d4d;
+    margin-left: 0%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -247,5 +256,9 @@
   .pagination {
     width: 100%;
     justify-content: space-between;
+  }
+  .discount_display {
+    color: #ff4d4d;
+    margin-left: 0%;
   }
 }
