@@ -31,31 +31,33 @@ const Sidebar = ({ onCategorySelect, selectedCategory }) => {
   };
 
   return (
-    <div className="sidebar-container">
-      <h3 className="sidebar-title">Browse Categories</h3>
-      <ul className="category-list">
-        <li
-          className={`category-item ${
-            selectedCategory === null ? "selected" : ""
-          }`}
-          onClick={() => handleCategoryClick(null)} // Show all products
-        >
-          All Products
-        </li>
-        {categories.map((category, index) => (
+    <>
+      <div className="sidebar-container">
+        <h3 className="sidebar-title">Browse Categories</h3>
+        <ul className="category-list">
           <li
-            key={index}
             className={`category-item ${
-              selectedCategory === category.name ? "selected" : ""
+              selectedCategory === null ? "selected" : ""
             }`}
-            onClick={() => handleCategoryClick(category.name)} // Show products from the selected category
+            onClick={() => handleCategoryClick(null)} // Show all products
           >
-            {category.name}{" "}
-            <span className="item-count">({category.count})</span>
+            All Products
           </li>
-        ))}
-      </ul>
-    </div>
+          {categories.map((category, index) => (
+            <li
+              key={index}
+              className={`category-item ${
+                selectedCategory === category.name ? "selected" : ""
+              }`}
+              onClick={() => handleCategoryClick(category.name)} // Show products from the selected category
+            >
+              {category.name}{" "}
+              <span className="item-count">({category.count})</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

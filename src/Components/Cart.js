@@ -7,6 +7,7 @@ import { formatPrice } from "../utils";
 const Cart = ({ cartItems, setCartItems }) => {
   const navigate = useNavigate();
   const [notification, setNotification] = useState({ message: "", type: "" });
+
   const handleRemoveItem = (name) => {
     setCartItems((prevCartItems) =>
       prevCartItems.filter((item) => item.name !== name)
@@ -47,6 +48,30 @@ const Cart = ({ cartItems, setCartItems }) => {
       (total, item) => total + item.unit_price * item.quantity,
       0
     );
+  };
+
+  // Adjusted function to return both the discount rate and percentage
+  const calculateDiscount = (subtotal) => {
+    if (subtotal >= 20000) return { rate: 0.15, percentage: 15 };
+    if (subtotal >= 10001) return { rate: 0.1, percentage: 10 };
+    if (subtotal >= 5000) return { rate: 0.05, percentage: 5 };
+    return { rate: 0, percentage: 0 };
+  };
+
+  const getDiscountAmount = () => {
+    const subtotal = getSubtotalPrice();
+    const { rate } = calculateDiscount(subtotal);
+    return subtotal * rate;
+  };
+
+  const getDiscountPercentage = () => {
+    const subtotal = getSubtotalPrice();
+    const { percentage } = calculateDiscount(subtotal);
+    return percentage;
+  };
+
+  const getTotalPrice = () => {
+    return getSubtotalPrice() - getDiscountAmount();
   };
 
   const handleConfirmEnquiry = () => {
@@ -141,10 +166,19 @@ const Cart = ({ cartItems, setCartItems }) => {
       <div className="cart-summary-section">
         <div className="cart-summary">
           <h3>Cart Totals</h3>
-
+          <div className="summary-item">
+            <span>Budgeted Price</span>
+            <span>₹ {formatPrice(getSubtotalPrice())}</span>
+          </div>
+          <div className="summary-item">
+            <span>
+              Discount (<b>{getDiscountPercentage()}%</b>)
+            </span>
+            <span>- ₹ {formatPrice(getDiscountAmount())}</span>
+          </div>
           <div className="summary-item total">
             <span>Budgeted Total Price</span>
-            <span>₹ {formatPrice(getSubtotalPrice())}</span>
+            <span>₹ {formatPrice(getTotalPrice())}</span>
           </div>
           <button className="proceed-btn" onClick={handleConfirmEnquiry}>
             Confirm Inquiry
