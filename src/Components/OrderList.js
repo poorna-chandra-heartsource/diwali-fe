@@ -43,7 +43,7 @@ const OrderList = () => {
     if (userId) {
       fetchOrders();
     }
-  }, [userId]);
+  }, [userId, navigate]);
 
   const handleOrderClick = (orderId) => {
     navigate("/order-details", { state: { orderId } });

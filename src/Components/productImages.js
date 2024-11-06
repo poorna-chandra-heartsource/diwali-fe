@@ -265,7 +265,6 @@ const productImages = {
   "BUDGET AERIALS": "/Diwali-product-images/diwali-budgetArials.jpg",
   "BUDGET AERIALS (3 Pcs)": "/Diwali-product-images/diwali-budgetArials.jpg",
   "BLAZE SERIES (2 Pcs)": "/Diwali-product-images/diwali-blazeSeries.jpg",
-  "SNOW WHITE": "/Diwali-product-images/diwali-SNOW-WHITEjpg.jpg",
   "FIRE CRACKER 10 in 1": "/Diwali-product-images/diwali-electricCrackers.jpg",
   "FLOWER POTS SUPER DELUXE":
     "/Diwali-product-images/diwali-FLOWER-POTS-SUPER-DELUXE.png",

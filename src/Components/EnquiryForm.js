@@ -84,6 +84,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
   }, [userData]);
 
   useEffect(() => {
+    /* eslint-disable react-hooks/exhaustive-deps */
     const orderItems = cartItems.map((item) => ({
       product_id: item._id,
       quantity: item.quantity,
@@ -100,7 +101,7 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
         orderItems,
       },
     }));
-  }, [cartItems]);
+  }, [cartItems]); // `calculateTotal` is intentionally excluded
 
   const calculateSubtotal = () => {
     return cartItems.reduce(
@@ -349,12 +350,12 @@ const EnquiryForm = ({ cartItems, setCartItems, userData }) => {
     navigate("/products");
   };
 
-  const getSubtotalPrice = () => {
-    return cartItems.reduce(
-      (total, item) => total + item.unit_price * item.quantity,
-      0
-    );
-  };
+  // const getSubtotalPrice = () => {
+  //   return cartItems.reduce(
+  //     (total, item) => total + item.unit_price * item.quantity,
+  //     0
+  //   );
+  // };
 
   return (
     <div className="form-order-container">

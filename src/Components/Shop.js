@@ -60,7 +60,7 @@ const Shop = ({ onAddToCart }) => {
     };
 
     fetchProducts();
-  }, []);
+  }, [selectedCategory]);
 
   useEffect(() => {
     let filteredProducts = allProducts;

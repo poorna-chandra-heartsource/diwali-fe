@@ -42,7 +42,7 @@ const OrderDetails = () => {
     if (orderId) {
       fetchOrderDetails();
     }
-  }, [orderId]);
+  }, [orderId, navigate]);
 
   if (!order) {
     return <p>Loading...</p>;
