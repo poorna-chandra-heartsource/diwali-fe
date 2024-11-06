@@ -24,7 +24,9 @@ const App = () => {
     return !!localStorage.getItem("token");
   });
 
+  /* eslint-disable no-unused-vars */
   const [selectedCategory, setSelectedCategory] = useState(null);
+  /* eslint-enable no-unused-vars */
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
